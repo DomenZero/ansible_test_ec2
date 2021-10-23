@@ -1,0 +1,1449 @@
+ANSIBLE_HOST_KEY_CHECKING=False ansible-playbook --tags "aws, fromgit" -i hosts.txt playbook_aws_service.yml -vvv --vault-password-file var_pass
+ansible-playbook 2.9.25
+  config file = /etc/ansible/ansible.cfg
+  configured module search path = [u'/root/.ansible/plugins/modules', u'/usr/share/ansible/plugins/modules']
+  ansible python module location = /usr/lib/python2.7/site-packages/ansible
+  executable location = /usr/bin/ansible-playbook
+  python version = 2.7.5 (default, Nov 16 2020, 22:23:17) [GCC 4.8.5 20150623 (Red Hat 4.8.5-44)]
+Using /etc/ansible/ansible.cfg as config file
+host_list declined parsing /root/ansible_test/hosts.txt as it did not pass its verify_file() method
+script declined parsing /root/ansible_test/hosts.txt as it did not pass its verify_file() method
+auto declined parsing /root/ansible_test/hosts.txt as it did not pass its verify_file() method
+yaml declined parsing /root/ansible_test/hosts.txt as it did not pass its verify_file() method
+Parsed /root/ansible_test/hosts.txt inventory source with ini plugin
+Skipping callback 'actionable', as we already have a stdout callback.
+Skipping callback 'counter_enabled', as we already have a stdout callback.
+Skipping callback 'debug', as we already have a stdout callback.
+Skipping callback 'dense', as we already have a stdout callback.
+Skipping callback 'dense', as we already have a stdout callback.
+Skipping callback 'full_skip', as we already have a stdout callback.
+Skipping callback 'json', as we already have a stdout callback.
+Skipping callback 'minimal', as we already have a stdout callback.
+Skipping callback 'null', as we already have a stdout callback.
+Skipping callback 'oneline', as we already have a stdout callback.
+Skipping callback 'selective', as we already have a stdout callback.
+Skipping callback 'skippy', as we already have a stdout callback.
+Skipping callback 'stderr', as we already have a stdout callback.
+Skipping callback 'unixy', as we already have a stdout callback.
+Skipping callback 'yaml', as we already have a stdout callback.
+
+PLAYBOOK: playbook_aws_service.yml ************************************************************************
+2 plays in playbook_aws_service.yml
+
+PLAY [Create AWS EC2 Instance for service] ****************************************************************
+META: ran handlers
+
+TASK [aws_create : Create a security group, open ports 22 and 80] *****************************************
+task path: /root/ansible_test/roles/aws_create/tasks/main.yml:2
+<localhost> ESTABLISH LOCAL CONNECTION FOR USER: root
+<localhost> EXEC /bin/sh -c 'echo ~root && sleep 0'
+<localhost> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /root/.ansible/tmp `"&& mkdir "` echo /root/.ansible/tmp/ansible-tmp-1635025631.05-9603-80306719494196 `" && echo ansible-tmp-1635025631.05-9603-80306719494196="` echo /root/.ansible/tmp/ansible-tmp-1635025631.05-9603-80306719494196 `" ) && sleep 0'
+Using module file /usr/lib/python2.7/site-packages/ansible/modules/cloud/amazon/ec2_group.py
+<localhost> PUT /root/.ansible/tmp/ansible-local-95886jMdif/tmp_ikqBj TO /root/.ansible/tmp/ansible-tmp-1635025631.05-9603-80306719494196/AnsiballZ_ec2_group.py
+<localhost> EXEC /bin/sh -c 'chmod u+x /root/.ansible/tmp/ansible-tmp-1635025631.05-9603-80306719494196/ /root/.ansible/tmp/ansible-tmp-1635025631.05-9603-80306719494196/AnsiballZ_ec2_group.py && sleep 0'
+<localhost> EXEC /bin/sh -c '/usr/bin/python3 /root/.ansible/tmp/ansible-tmp-1635025631.05-9603-80306719494196/AnsiballZ_ec2_group.py && sleep 0'
+<localhost> EXEC /bin/sh -c 'rm -f -r /root/.ansible/tmp/ansible-tmp-1635025631.05-9603-80306719494196/ > /dev/null 2>&1 && sleep 0'
+ok: [localhost] => {
+    "changed": false,
+    "description": "Security Group for the server with port 22, 80, 443",
+    "group_id": "sg-0bb608f256c8e281a",
+    "group_name": "Ansible-SecurityGroup",
+    "invocation": {
+        "module_args": {
+            "aws_access_key": "AKIAT2OUTJLVXCS24V2A",
+            "aws_secret_key": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+            "debug_botocore_endpoint_logs": false,
+            "description": "Security Group for the server with port 22, 80, 443",
+            "ec2_url": null,
+            "group_id": null,
+            "name": "Ansible-SecurityGroup",
+            "profile": null,
+            "purge_rules": true,
+            "purge_rules_egress": true,
+            "purge_tags": true,
+            "region": "us-east-1",
+            "rules": [
+                {
+                    "cidr_ip": "0.0.0.0/0",
+                    "from_port": 22,
+                    "proto": "tcp",
+                    "to_port": 22
+                },
+                {
+                    "cidr_ip": "0.0.0.0/0",
+                    "from_port": 80,
+                    "proto": "tcp",
+                    "to_port": 80
+                },
+                {
+                    "cidr_ip": "0.0.0.0/0",
+                    "from_port": 443,
+                    "proto": "tcp",
+                    "to_port": 443
+                }
+            ],
+            "rules_egress": [
+                {
+                    "cidr_ip": "0.0.0.0/0",
+                    "proto": "all"
+                }
+            ],
+            "security_token": null,
+            "state": "present",
+            "tags": null,
+            "validate_certs": true,
+            "vpc_id": null
+        }
+    },
+    "ip_permissions": [
+        {
+            "from_port": 80,
+            "ip_protocol": "tcp",
+            "ip_ranges": [
+                {
+                    "cidr_ip": "0.0.0.0/0"
+                }
+            ],
+            "ipv6_ranges": [],
+            "prefix_list_ids": [],
+            "to_port": 80,
+            "user_id_group_pairs": []
+        },
+        {
+            "from_port": 22,
+            "ip_protocol": "tcp",
+            "ip_ranges": [
+                {
+                    "cidr_ip": "0.0.0.0/0"
+                }
+            ],
+            "ipv6_ranges": [],
+            "prefix_list_ids": [],
+            "to_port": 22,
+            "user_id_group_pairs": []
+        },
+        {
+            "from_port": 443,
+            "ip_protocol": "tcp",
+            "ip_ranges": [
+                {
+                    "cidr_ip": "0.0.0.0/0"
+                }
+            ],
+            "ipv6_ranges": [],
+            "prefix_list_ids": [],
+            "to_port": 443,
+            "user_id_group_pairs": []
+        }
+    ],
+    "ip_permissions_egress": [
+        {
+            "ip_protocol": "-1",
+            "ip_ranges": [
+                {
+                    "cidr_ip": "0.0.0.0/0"
+                }
+            ],
+            "ipv6_ranges": [],
+            "prefix_list_ids": [],
+            "user_id_group_pairs": []
+        }
+    ],
+    "owner_id": "262975736555",
+    "tags": {},
+    "vpc_id": "vpc-05438a78"
+}
+
+TASK [aws_create : Create AWS EC2 Server] *****************************************************************
+task path: /root/ansible_test/roles/aws_create/tasks/main.yml:26
+<localhost> ESTABLISH LOCAL CONNECTION FOR USER: root
+<localhost> EXEC /bin/sh -c 'echo ~root && sleep 0'
+<localhost> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /root/.ansible/tmp `"&& mkdir "` echo /root/.ansible/tmp/ansible-tmp-1635025634.39-9646-196795560257596 `" && echo ansible-tmp-1635025634.39-9646-196795560257596="` echo /root/.ansible/tmp/ansible-tmp-1635025634.39-9646-196795560257596 `" ) && sleep 0'
+Using module file /usr/lib/python2.7/site-packages/ansible/modules/cloud/amazon/ec2.py
+<localhost> PUT /root/.ansible/tmp/ansible-local-95886jMdif/tmpTUQxQz TO /root/.ansible/tmp/ansible-tmp-1635025634.39-9646-196795560257596/AnsiballZ_ec2.py
+<localhost> EXEC /bin/sh -c 'chmod u+x /root/.ansible/tmp/ansible-tmp-1635025634.39-9646-196795560257596/ /root/.ansible/tmp/ansible-tmp-1635025634.39-9646-196795560257596/AnsiballZ_ec2.py && sleep 0'
+<localhost> EXEC /bin/sh -c '/usr/bin/python3 /root/.ansible/tmp/ansible-tmp-1635025634.39-9646-196795560257596/AnsiballZ_ec2.py && sleep 0'
+<localhost> EXEC /bin/sh -c 'rm -f -r /root/.ansible/tmp/ansible-tmp-1635025634.39-9646-196795560257596/ > /dev/null 2>&1 && sleep 0'
+changed: [localhost] => {
+    "changed": true,
+    "instance_ids": [
+        "i-0964f007f2e291f38"
+    ],
+    "instances": [
+        {
+            "ami_launch_index": "0",
+            "architecture": "x86_64",
+            "block_device_mapping": {
+                "/dev/xvda": {
+                    "delete_on_termination": true,
+                    "status": "attached",
+                    "volume_id": "vol-0b38a115ab91afd63"
+                }
+            },
+            "dns_name": "ec2-52-87-242-93.compute-1.amazonaws.com",
+            "ebs_optimized": false,
+            "groups": {
+                "sg-0bb608f256c8e281a": "Ansible-SecurityGroup"
+            },
+            "hypervisor": "xen",
+            "id": "i-0964f007f2e291f38",
+            "image_id": "ami-0e52d91bd15963d8f",
+            "instance_type": "t2.micro",
+            "kernel": null,
+            "key_name": "ansible_key",
+            "launch_time": "2021-10-23T21:47:17.000Z",
+            "placement": "us-east-1c",
+            "private_dns_name": "ip-172-31-92-146.ec2.internal",
+            "private_ip": "172.31.92.146",
+            "public_dns_name": "ec2-52-87-242-93.compute-1.amazonaws.com",
+            "public_ip": "52.87.242.93",
+            "ramdisk": null,
+            "region": "us-east-1",
+            "root_device_name": "/dev/xvda",
+            "root_device_type": "ebs",
+            "state": "running",
+            "state_code": 16,
+            "tags": {
+                "Name": "AnsibleTestTask",
+                "Type": "AnsibleEC2-SRE"
+            },
+            "tenancy": "default",
+            "virtualization_type": "hvm"
+        }
+    ],
+    "invocation": {
+        "module_args": {
+            "assign_public_ip": null,
+            "aws_access_key": "AKIAT2OUTJLVXCS24V2A",
+            "aws_secret_key": "VALUE_SPECIFIED_IN_NO_LOG_PARAMETER",
+            "count": 1,
+            "count_tag": null,
+            "debug_botocore_endpoint_logs": false,
+            "ebs_optimized": false,
+            "ec2_url": null,
+            "exact_count": null,
+            "group": [
+                "Ansible-SecurityGroup"
+            ],
+            "group_id": null,
+            "id": null,
+            "image": "ami-0e52d91bd15963d8f",
+            "instance_ids": null,
+            "instance_initiated_shutdown_behavior": "stop",
+            "instance_profile_name": null,
+            "instance_tags": {
+                "Name": "AnsibleTestTask",
+                "Type": "AnsibleEC2-SRE"
+            },
+            "instance_type": "t2.micro",
+            "kernel": null,
+            "key_name": "ansible_key",
+            "monitoring": false,
+            "network_interfaces": null,
+            "placement_group": null,
+            "private_ip": null,
+            "profile": null,
+            "ramdisk": null,
+            "region": "us-east-1",
+            "security_token": null,
+            "source_dest_check": null,
+            "spot_launch_group": null,
+            "spot_price": null,
+            "spot_type": "one-time",
+            "spot_wait_timeout": 600,
+            "state": "present",
+            "tenancy": "default",
+            "termination_protection": null,
+            "user_data": null,
+            "validate_certs": true,
+            "volumes": null,
+            "vpc_subnet_id": null,
+            "wait": true,
+            "wait_timeout": 300,
+            "zone": null
+        }
+    },
+    "tagged_instances": []
+}
+
+TASK [aws_create : Print all EC2 variables] ***************************************************************
+task path: /root/ansible_test/roles/aws_create/tasks/main.yml:42
+ok: [localhost] => {
+    "ec2": {
+        "changed": true,
+        "failed": false,
+        "instance_ids": [
+            "i-0964f007f2e291f38"
+        ],
+        "instances": [
+            {
+                "ami_launch_index": "0",
+                "architecture": "x86_64",
+                "block_device_mapping": {
+                    "/dev/xvda": {
+                        "delete_on_termination": true,
+                        "status": "attached",
+                        "volume_id": "vol-0b38a115ab91afd63"
+                    }
+                },
+                "dns_name": "ec2-52-87-242-93.compute-1.amazonaws.com",
+                "ebs_optimized": false,
+                "groups": {
+                    "sg-0bb608f256c8e281a": "Ansible-SecurityGroup"
+                },
+                "hypervisor": "xen",
+                "id": "i-0964f007f2e291f38",
+                "image_id": "ami-0e52d91bd15963d8f",
+                "instance_type": "t2.micro",
+                "kernel": null,
+                "key_name": "ansible_key",
+                "launch_time": "2021-10-23T21:47:17.000Z",
+                "placement": "us-east-1c",
+                "private_dns_name": "ip-172-31-92-146.ec2.internal",
+                "private_ip": "172.31.92.146",
+                "public_dns_name": "ec2-52-87-242-93.compute-1.amazonaws.com",
+                "public_ip": "52.87.242.93",
+                "ramdisk": null,
+                "region": "us-east-1",
+                "root_device_name": "/dev/xvda",
+                "root_device_type": "ebs",
+                "state": "running",
+                "state_code": 16,
+                "tags": {
+                    "Name": "AnsibleTestTask",
+                    "Type": "AnsibleEC2-SRE"
+                },
+                "tenancy": "default",
+                "virtualization_type": "hvm"
+            }
+        ],
+        "tagged_instances": []
+    }
+}
+
+TASK [aws_create : Add new instance to host group] ********************************************************
+task path: /root/ansible_test/roles/aws_create/tasks/main.yml:45
+creating host via 'add_host': hostname=52.87.242.93
+changed: [localhost] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-92-146.ec2.internal', u'block_device_mapping': {u'/dev/xvda': {u'status': u'attached', u'delete_on_termination': True, u'volume_id': u'vol-0b38a115ab91afd63'}}, u'key_name': u'ansible_key', u'public_ip': u'52.87.242.93', u'image_id': u'ami-0e52d91bd15963d8f', u'tenancy': u'default', u'private_ip': u'172.31.92.146', u'groups': {u'sg-0bb608f256c8e281a': u'Ansible-SecurityGroup'}, u'public_dns_name': u'ec2-52-87-242-93.compute-1.amazonaws.com', u'state_code': 16, u'id': u'i-0964f007f2e291f38', u'tags': {u'Type': u'AnsibleEC2-SRE', u'Name': u'AnsibleTestTask'}, u'placement': u'us-east-1c', u'ami_launch_index': u'0', u'dns_name': u'ec2-52-87-242-93.compute-1.amazonaws.com', u'region': u'us-east-1', u'ebs_optimized': False, u'launch_time': u'2021-10-23T21:47:17.000Z', u'instance_type': u't2.micro', u'state': u'running', u'architecture': u'x86_64', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'root_device_name': u'/dev/xvda'}) => {
+    "add_host": {
+        "groups": [
+            "awsserver"
+        ],
+        "host_name": "52.87.242.93",
+        "host_vars": {}
+    },
+    "ansible_loop_var": "item",
+    "changed": true,
+    "item": {
+        "ami_launch_index": "0",
+        "architecture": "x86_64",
+        "block_device_mapping": {
+            "/dev/xvda": {
+                "delete_on_termination": true,
+                "status": "attached",
+                "volume_id": "vol-0b38a115ab91afd63"
+            }
+        },
+        "dns_name": "ec2-52-87-242-93.compute-1.amazonaws.com",
+        "ebs_optimized": false,
+        "groups": {
+            "sg-0bb608f256c8e281a": "Ansible-SecurityGroup"
+        },
+        "hypervisor": "xen",
+        "id": "i-0964f007f2e291f38",
+        "image_id": "ami-0e52d91bd15963d8f",
+        "instance_type": "t2.micro",
+        "kernel": null,
+        "key_name": "ansible_key",
+        "launch_time": "2021-10-23T21:47:17.000Z",
+        "placement": "us-east-1c",
+        "private_dns_name": "ip-172-31-92-146.ec2.internal",
+        "private_ip": "172.31.92.146",
+        "public_dns_name": "ec2-52-87-242-93.compute-1.amazonaws.com",
+        "public_ip": "52.87.242.93",
+        "ramdisk": null,
+        "region": "us-east-1",
+        "root_device_name": "/dev/xvda",
+        "root_device_type": "ebs",
+        "state": "running",
+        "state_code": 16,
+        "tags": {
+            "Name": "AnsibleTestTask",
+            "Type": "AnsibleEC2-SRE"
+        },
+        "tenancy": "default",
+        "virtualization_type": "hvm"
+    }
+}
+
+TASK [aws_create : Wait for SSH in Instance] **************************************************************
+task path: /root/ansible_test/roles/aws_create/tasks/main.yml:51
+<localhost> ESTABLISH LOCAL CONNECTION FOR USER: root
+<localhost> EXEC /bin/sh -c 'echo ~root && sleep 0'
+<localhost> EXEC /bin/sh -c '( umask 77 && mkdir -p "` echo /root/.ansible/tmp `"&& mkdir "` echo /root/.ansible/tmp/ansible-tmp-1635025671.95-9911-208069894433328 `" && echo ansible-tmp-1635025671.95-9911-208069894433328="` echo /root/.ansible/tmp/ansible-tmp-1635025671.95-9911-208069894433328 `" ) && sleep 0'
+Using module file /usr/lib/python2.7/site-packages/ansible/modules/utilities/logic/wait_for.py
+<localhost> PUT /root/.ansible/tmp/ansible-local-95886jMdif/tmpM5_Fsn TO /root/.ansible/tmp/ansible-tmp-1635025671.95-9911-208069894433328/AnsiballZ_wait_for.py
+<localhost> EXEC /bin/sh -c 'chmod u+x /root/.ansible/tmp/ansible-tmp-1635025671.95-9911-208069894433328/ /root/.ansible/tmp/ansible-tmp-1635025671.95-9911-208069894433328/AnsiballZ_wait_for.py && sleep 0'
+<localhost> EXEC /bin/sh -c '/usr/bin/python3 /root/.ansible/tmp/ansible-tmp-1635025671.95-9911-208069894433328/AnsiballZ_wait_for.py && sleep 0'
+<localhost> EXEC /bin/sh -c 'rm -f -r /root/.ansible/tmp/ansible-tmp-1635025671.95-9911-208069894433328/ > /dev/null 2>&1 && sleep 0'
+ok: [localhost] => (item={u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-92-146.ec2.internal', u'block_device_mapping': {u'/dev/xvda': {u'status': u'attached', u'delete_on_termination': True, u'volume_id': u'vol-0b38a115ab91afd63'}}, u'key_name': u'ansible_key', u'public_ip': u'52.87.242.93', u'image_id': u'ami-0e52d91bd15963d8f', u'tenancy': u'default', u'private_ip': u'172.31.92.146', u'groups': {u'sg-0bb608f256c8e281a': u'Ansible-SecurityGroup'}, u'public_dns_name': u'ec2-52-87-242-93.compute-1.amazonaws.com', u'state_code': 16, u'id': u'i-0964f007f2e291f38', u'tags': {u'Type': u'AnsibleEC2-SRE', u'Name': u'AnsibleTestTask'}, u'placement': u'us-east-1c', u'ami_launch_index': u'0', u'dns_name': u'ec2-52-87-242-93.compute-1.amazonaws.com', u'region': u'us-east-1', u'ebs_optimized': False, u'launch_time': u'2021-10-23T21:47:17.000Z', u'instance_type': u't2.micro', u'state': u'running', u'architecture': u'x86_64', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'root_device_name': u'/dev/xvda'}) => {
+    "ansible_loop_var": "item",
+    "changed": false,
+    "elapsed": 12,
+    "invocation": {
+        "module_args": {
+            "active_connection_states": [
+                "ESTABLISHED",
+                "FIN_WAIT1",
+                "FIN_WAIT2",
+                "SYN_RECV",
+                "SYN_SENT",
+                "TIME_WAIT"
+            ],
+            "connect_timeout": 5,
+            "delay": 0,
+            "exclude_hosts": null,
+            "host": "ec2-52-87-242-93.compute-1.amazonaws.com",
+            "msg": null,
+            "path": null,
+            "port": 22,
+            "search_regex": null,
+            "sleep": 1,
+            "state": "started",
+            "timeout": 300
+        }
+    },
+    "item": {
+        "ami_launch_index": "0",
+        "architecture": "x86_64",
+        "block_device_mapping": {
+            "/dev/xvda": {
+                "delete_on_termination": true,
+                "status": "attached",
+                "volume_id": "vol-0b38a115ab91afd63"
+            }
+        },
+        "dns_name": "ec2-52-87-242-93.compute-1.amazonaws.com",
+        "ebs_optimized": false,
+        "groups": {
+            "sg-0bb608f256c8e281a": "Ansible-SecurityGroup"
+        },
+        "hypervisor": "xen",
+        "id": "i-0964f007f2e291f38",
+        "image_id": "ami-0e52d91bd15963d8f",
+        "instance_type": "t2.micro",
+        "kernel": null,
+        "key_name": "ansible_key",
+        "launch_time": "2021-10-23T21:47:17.000Z",
+        "placement": "us-east-1c",
+        "private_dns_name": "ip-172-31-92-146.ec2.internal",
+        "private_ip": "172.31.92.146",
+        "public_dns_name": "ec2-52-87-242-93.compute-1.amazonaws.com",
+        "public_ip": "52.87.242.93",
+        "ramdisk": null,
+        "region": "us-east-1",
+        "root_device_name": "/dev/xvda",
+        "root_device_type": "ebs",
+        "state": "running",
+        "state_code": 16,
+        "tags": {
+            "Name": "AnsibleTestTask",
+            "Type": "AnsibleEC2-SRE"
+        },
+        "tenancy": "default",
+        "virtualization_type": "hvm"
+    },
+    "match_groupdict": {},
+    "match_groups": [],
+    "path": null,
+    "port": 22,
+    "search_regex": null,
+    "state": "started"
+}
+META: ran handlers
+META: ran handlers
+
+PLAY [AWS Server] *****************************************************************************************
+META: ran handlers
+
+TASK [fromgit : Install Apache] ***************************************************************************
+task path: /root/ansible_test/roles/fromgit/tasks/main.yml:2
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 -tt 52.87.242.93 'sudo -H -S -n  -u root /bin/sh -c '"'"'echo BECOME-SUCCESS-ketdhgljmwdjuzfuazvbtvanopwvjtuq ; yum -y install httpd'"'"''
+Escalation succeeded
+<52.87.242.93> (0, 'Loaded plugins: extras_suggestions, langpacks, priorities, update-motd\r\nResolving Dependencies\r\n--> Running transaction check\r\n---> Package httpd.x86_64 0:2.4.51-1.amzn2 will be installed\r\n--> Processing Dependency: httpd-tools = 2.4.51-1.amzn2 for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: httpd-filesystem = 2.4.51-1.amzn2 for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: system-logos-httpd for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: mod_http2 for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: httpd-filesystem for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: /etc/mime.types for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: libaprutil-1.so.0()(64bit) for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: libapr-1.so.0()(64bit) for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Running transaction check\r\n---> Package apr.x86_64 0:1.7.0-9.amzn2 will be installed\r\n---> Package apr-util.x86_64 0:1.6.1-5.amzn2.0.2 will be installed\r\n--> Processing Dependency: apr-util-bdb(x86-64) = 1.6.1-5.amzn2.0.2 for package: apr-util-1.6.1-5.amzn2.0.2.x86_64\r\n---> Package generic-logos-httpd.noarch 0:18.0.0-4.amzn2 will be installed\r\n---> Package httpd-filesystem.noarch 0:2.4.51-1.amzn2 will be installed\r\n---> Package httpd-tools.x86_64 0:2.4.51-1.amzn2 will be installed\r\n---> Package mailcap.noarch 0:2.1.41-2.amzn2 will be installed\r\n---> Package mod_http2.x86_64 0:1.15.19-1.amzn2.0.1 will be installed\r\n--> Running transaction check\r\n---> Package apr-util-bdb.x86_64 0:1.6.1-5.amzn2.0.2 will be installed\r\n--> Finished Dependency Resolution\r\n\r\nDependencies Resolved\r\n\r\n================================================================================\r\n Package                Arch      Version                   Repository     Size\r\n================================================================================\r\nInstalling:\r\n httpd                  x86_64    2.4.51-1.amzn2            amzn2-core    1.3 M\r\nInstalling for dependencies:\r\n apr                    x86_64    1.7.0-9.amzn2             amzn2-core    122 k\r\n apr-util               x86_64    1.6.1-5.amzn2.0.2         amzn2-core     99 k\r\n apr-util-bdb           x86_64    1.6.1-5.amzn2.0.2         amzn2-core     19 k\r\n generic-logos-httpd    noarch    18.0.0-4.amzn2            amzn2-core     19 k\r\n httpd-filesystem       noarch    2.4.51-1.amzn2            amzn2-core     24 k\r\n httpd-tools            x86_64    2.4.51-1.amzn2            amzn2-core     88 k\r\n mailcap                noarch    2.1.41-2.amzn2            amzn2-core     31 k\r\n mod_http2              x86_64    1.15.19-1.amzn2.0.1       amzn2-core    149 k\r\n\r\nTransaction Summary\r\n================================================================================\r\nInstall  1 Package (+8 Dependent packages)\r\n\r\nTotal download size: 1.9 M\r\nInstalled size: 5.2 M\r\nDownloading packages:\r\n\r(1/9): apr-util-1.6.1-5.amzn2.0.2.x86_64.rpm               |  99 kB   00:00     \r\n\r(2/9): apr-1.7.0-9.amzn2.x86_64.rpm                        | 122 kB   00:00     \r\n\r(3/9): apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64.rpm           |  19 kB   00:00     \r\n\r(4/9): generic-logos-httpd-18.0.0-4.amzn2.noarch.rpm       |  19 kB   00:00     \r\n\r(5/9): httpd-filesystem-2.4.51-1.amzn2.noarch.rpm          |  24 kB   00:00     \r\n\r(6/9): httpd-2.4.51-1.amzn2.x86_64.rpm                     | 1.3 MB   00:00     \r\n\r(7/9): httpd-tools-2.4.51-1.amzn2.x86_64.rpm               |  88 kB   00:00     \r\n\r(8/9): mailcap-2.1.41-2.amzn2.noarch.rpm                   |  31 kB   00:00     \r\n\r(9/9): mod_http2-1.15.19-1.amzn2.0.1.x86_64.rpm            | 149 kB   00:00     \r\n--------------------------------------------------------------------------------\r\nTotal                                              9.9 MB/s | 1.9 MB  00:00     \r\nRunning transaction check\r\nRunning transaction test\r\nTransaction test succeeded\r\nRunning transaction\r\n\r  Installing : apr-1.7.0-9.amzn2.x86_64 [                                 ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64 [########                         ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64 [################                 ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64 [########################         ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64 [##############################   ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64 [################################ ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64                                     1/9 \r\n\r  Installing : apr-util-bdb-1.6.1-5.amzn2.0 [                             ] 2/9\r  Installing : apr-util-bdb-1.6.1-5.amzn2.0 [############################ ] 2/9\r  Installing : apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64                        2/9 \r\n\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x [                             ] 3/9\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x [########                     ] 3/9\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x [#################            ] 3/9\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x [#########################    ] 3/9\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x [############################ ] 3/9\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x86_64                            3/9 \r\n\r  Installing : httpd-tools-2.4.51-1.amzn2.x [                             ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [#########                    ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [############                 ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [###############              ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [##################           ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [####################         ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [######################       ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [##########################   ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [###########################  ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [############################ ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x86_64                            4/9 \r\n\r  Installing : generic-logos-httpd-18.0.0-4 [                             ] 5/9\r  Installing : generic-logos-httpd-18.0.0-4 [########################     ] 5/9\r  Installing : generic-logos-httpd-18.0.0-4 [############################ ] 5/9\r  Installing : generic-logos-httpd-18.0.0-4.amzn2.noarch                    5/9 \r\n\r  Installing : mailcap-2.1.41-2.amzn2.noarc [                             ] 6/9\r  Installing : mailcap-2.1.41-2.amzn2.noarc [#######################      ] 6/9\r  Installing : mailcap-2.1.41-2.amzn2.noarc [########################     ] 6/9\r  Installing : mailcap-2.1.41-2.amzn2.noarc [##########################   ] 6/9\r  Installing : mailcap-2.1.41-2.amzn2.noarc [############################ ] 6/9\r  Installing : mailcap-2.1.41-2.amzn2.noarch                                6/9 \r\n\r  Installing : httpd-filesystem-2.4.51-1.am [                             ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [#                            ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [####                         ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [###########                  ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [##############               ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [################             ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [##################           ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [####################         ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [######################       ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [########################     ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [##########################   ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.amzn2.noarch                       7/9 \r\n\r  Installing : mod_http2-1.15.19-1.amzn2.0. [                             ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [####                         ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [#########                    ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [##############               ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [##################           ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [######################       ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [###########################  ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [############################ ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0.1.x86_64                         8/9 \r\n\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [                              ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#                             ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [##                            ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [###                           ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [####                          ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#####                         ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [######                        ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#######                       ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [########                      ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#########                     ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [##########                    ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [###########                   ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [############                  ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#############                 ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [##############                ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [###############               ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [################              ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#################             ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [##################            ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [###################           ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [####################          ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#####################         ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [######################        ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#######################       ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [########################      ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#########################     ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [##########################    ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [###########################   ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [############################  ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [############################# ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64                                  9/9 \r\n\r  Verifying  : apr-util-1.6.1-5.amzn2.0.2.x86_64                            1/9 \r\n\r  Verifying  : httpd-2.4.51-1.amzn2.x86_64                                  2/9 \r\n\r  Verifying  : apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64                        3/9 \r\n\r  Verifying  : httpd-filesystem-2.4.51-1.amzn2.noarch                       4/9 \r\n\r  Verifying  : apr-1.7.0-9.amzn2.x86_64                                     5/9 \r\n\r  Verifying  : mailcap-2.1.41-2.amzn2.noarch                                6/9 \r\n\r  Verifying  : generic-logos-httpd-18.0.0-4.amzn2.noarch                    7/9 \r\n\r  Verifying  : mod_http2-1.15.19-1.amzn2.0.1.x86_64                         8/9 \r\n\r  Verifying  : httpd-tools-2.4.51-1.amzn2.x86_64                            9/9 \r\n\r\nInstalled:\r\n  httpd.x86_64 0:2.4.51-1.amzn2                                                 \r\n\r\nDependency Installed:\r\n  apr.x86_64 0:1.7.0-9.amzn2                                                    \r\n  apr-util.x86_64 0:1.6.1-5.amzn2.0.2                                           \r\n  apr-util-bdb.x86_64 0:1.6.1-5.amzn2.0.2                                       \r\n  generic-logos-httpd.noarch 0:18.0.0-4.amzn2                                   \r\n  httpd-filesystem.noarch 0:2.4.51-1.amzn2                                      \r\n  httpd-tools.x86_64 0:2.4.51-1.amzn2                                           \r\n  mailcap.noarch 0:2.1.41-2.amzn2                                               \r\n  mod_http2.x86_64 0:1.15.19-1.amzn2.0.1                                        \r\n\r\nComplete!\r\n', "Warning: Permanently added '52.87.242.93' (ECDSA) to the list of known hosts.\r\nShared connection to 52.87.242.93 closed.\r\n")
+changed: [52.87.242.93] => {
+    "changed": true,
+    "rc": 0,
+    "stderr": "Warning: Permanently added '52.87.242.93' (ECDSA) to the list of known hosts.\r\nShared connection to 52.87.242.93 closed.\r\n",
+    "stderr_lines": [
+        "Warning: Permanently added '52.87.242.93' (ECDSA) to the list of known hosts.",
+        "Shared connection to 52.87.242.93 closed."
+    ],
+    "stdout": "Loaded plugins: extras_suggestions, langpacks, priorities, update-motd\r\nResolving Dependencies\r\n--> Running transaction check\r\n---> Package httpd.x86_64 0:2.4.51-1.amzn2 will be installed\r\n--> Processing Dependency: httpd-tools = 2.4.51-1.amzn2 for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: httpd-filesystem = 2.4.51-1.amzn2 for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: system-logos-httpd for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: mod_http2 for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: httpd-filesystem for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: /etc/mime.types for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: libaprutil-1.so.0()(64bit) for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Processing Dependency: libapr-1.so.0()(64bit) for package: httpd-2.4.51-1.amzn2.x86_64\r\n--> Running transaction check\r\n---> Package apr.x86_64 0:1.7.0-9.amzn2 will be installed\r\n---> Package apr-util.x86_64 0:1.6.1-5.amzn2.0.2 will be installed\r\n--> Processing Dependency: apr-util-bdb(x86-64) = 1.6.1-5.amzn2.0.2 for package: apr-util-1.6.1-5.amzn2.0.2.x86_64\r\n---> Package generic-logos-httpd.noarch 0:18.0.0-4.amzn2 will be installed\r\n---> Package httpd-filesystem.noarch 0:2.4.51-1.amzn2 will be installed\r\n---> Package httpd-tools.x86_64 0:2.4.51-1.amzn2 will be installed\r\n---> Package mailcap.noarch 0:2.1.41-2.amzn2 will be installed\r\n---> Package mod_http2.x86_64 0:1.15.19-1.amzn2.0.1 will be installed\r\n--> Running transaction check\r\n---> Package apr-util-bdb.x86_64 0:1.6.1-5.amzn2.0.2 will be installed\r\n--> Finished Dependency Resolution\r\n\r\nDependencies Resolved\r\n\r\n================================================================================\r\n Package                Arch      Version                   Repository     Size\r\n================================================================================\r\nInstalling:\r\n httpd                  x86_64    2.4.51-1.amzn2            amzn2-core    1.3 M\r\nInstalling for dependencies:\r\n apr                    x86_64    1.7.0-9.amzn2             amzn2-core    122 k\r\n apr-util               x86_64    1.6.1-5.amzn2.0.2         amzn2-core     99 k\r\n apr-util-bdb           x86_64    1.6.1-5.amzn2.0.2         amzn2-core     19 k\r\n generic-logos-httpd    noarch    18.0.0-4.amzn2            amzn2-core     19 k\r\n httpd-filesystem       noarch    2.4.51-1.amzn2            amzn2-core     24 k\r\n httpd-tools            x86_64    2.4.51-1.amzn2            amzn2-core     88 k\r\n mailcap                noarch    2.1.41-2.amzn2            amzn2-core     31 k\r\n mod_http2              x86_64    1.15.19-1.amzn2.0.1       amzn2-core    149 k\r\n\r\nTransaction Summary\r\n================================================================================\r\nInstall  1 Package (+8 Dependent packages)\r\n\r\nTotal download size: 1.9 M\r\nInstalled size: 5.2 M\r\nDownloading packages:\r\n\r(1/9): apr-util-1.6.1-5.amzn2.0.2.x86_64.rpm               |  99 kB   00:00     \r\n\r(2/9): apr-1.7.0-9.amzn2.x86_64.rpm                        | 122 kB   00:00     \r\n\r(3/9): apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64.rpm           |  19 kB   00:00     \r\n\r(4/9): generic-logos-httpd-18.0.0-4.amzn2.noarch.rpm       |  19 kB   00:00     \r\n\r(5/9): httpd-filesystem-2.4.51-1.amzn2.noarch.rpm          |  24 kB   00:00     \r\n\r(6/9): httpd-2.4.51-1.amzn2.x86_64.rpm                     | 1.3 MB   00:00     \r\n\r(7/9): httpd-tools-2.4.51-1.amzn2.x86_64.rpm               |  88 kB   00:00     \r\n\r(8/9): mailcap-2.1.41-2.amzn2.noarch.rpm                   |  31 kB   00:00     \r\n\r(9/9): mod_http2-1.15.19-1.amzn2.0.1.x86_64.rpm            | 149 kB   00:00     \r\n--------------------------------------------------------------------------------\r\nTotal                                              9.9 MB/s | 1.9 MB  00:00     \r\nRunning transaction check\r\nRunning transaction test\r\nTransaction test succeeded\r\nRunning transaction\r\n\r  Installing : apr-1.7.0-9.amzn2.x86_64 [                                 ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64 [########                         ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64 [################                 ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64 [########################         ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64 [##############################   ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64 [################################ ] 1/9\r  Installing : apr-1.7.0-9.amzn2.x86_64                                     1/9 \r\n\r  Installing : apr-util-bdb-1.6.1-5.amzn2.0 [                             ] 2/9\r  Installing : apr-util-bdb-1.6.1-5.amzn2.0 [############################ ] 2/9\r  Installing : apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64                        2/9 \r\n\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x [                             ] 3/9\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x [########                     ] 3/9\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x [#################            ] 3/9\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x [#########################    ] 3/9\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x [############################ ] 3/9\r  Installing : apr-util-1.6.1-5.amzn2.0.2.x86_64                            3/9 \r\n\r  Installing : httpd-tools-2.4.51-1.amzn2.x [                             ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [#########                    ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [############                 ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [###############              ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [##################           ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [####################         ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [######################       ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [##########################   ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [###########################  ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x [############################ ] 4/9\r  Installing : httpd-tools-2.4.51-1.amzn2.x86_64                            4/9 \r\n\r  Installing : generic-logos-httpd-18.0.0-4 [                             ] 5/9\r  Installing : generic-logos-httpd-18.0.0-4 [########################     ] 5/9\r  Installing : generic-logos-httpd-18.0.0-4 [############################ ] 5/9\r  Installing : generic-logos-httpd-18.0.0-4.amzn2.noarch                    5/9 \r\n\r  Installing : mailcap-2.1.41-2.amzn2.noarc [                             ] 6/9\r  Installing : mailcap-2.1.41-2.amzn2.noarc [#######################      ] 6/9\r  Installing : mailcap-2.1.41-2.amzn2.noarc [########################     ] 6/9\r  Installing : mailcap-2.1.41-2.amzn2.noarc [##########################   ] 6/9\r  Installing : mailcap-2.1.41-2.amzn2.noarc [############################ ] 6/9\r  Installing : mailcap-2.1.41-2.amzn2.noarch                                6/9 \r\n\r  Installing : httpd-filesystem-2.4.51-1.am [                             ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [#                            ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [####                         ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [###########                  ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [##############               ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [################             ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [##################           ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [####################         ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [######################       ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [########################     ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.am [##########################   ] 7/9\r  Installing : httpd-filesystem-2.4.51-1.amzn2.noarch                       7/9 \r\n\r  Installing : mod_http2-1.15.19-1.amzn2.0. [                             ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [####                         ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [#########                    ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [##############               ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [##################           ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [######################       ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [###########################  ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0. [############################ ] 8/9\r  Installing : mod_http2-1.15.19-1.amzn2.0.1.x86_64                         8/9 \r\n\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [                              ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#                             ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [##                            ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [###                           ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [####                          ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#####                         ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [######                        ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#######                       ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [########                      ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#########                     ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [##########                    ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [###########                   ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [############                  ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#############                 ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [##############                ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [###############               ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [################              ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#################             ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [##################            ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [###################           ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [####################          ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#####################         ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [######################        ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#######################       ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [########################      ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [#########################     ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [##########################    ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [###########################   ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [############################  ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64 [############################# ] 9/9\r  Installing : httpd-2.4.51-1.amzn2.x86_64                                  9/9 \r\n\r  Verifying  : apr-util-1.6.1-5.amzn2.0.2.x86_64                            1/9 \r\n\r  Verifying  : httpd-2.4.51-1.amzn2.x86_64                                  2/9 \r\n\r  Verifying  : apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64                        3/9 \r\n\r  Verifying  : httpd-filesystem-2.4.51-1.amzn2.noarch                       4/9 \r\n\r  Verifying  : apr-1.7.0-9.amzn2.x86_64                                     5/9 \r\n\r  Verifying  : mailcap-2.1.41-2.amzn2.noarch                                6/9 \r\n\r  Verifying  : generic-logos-httpd-18.0.0-4.amzn2.noarch                    7/9 \r\n\r  Verifying  : mod_http2-1.15.19-1.amzn2.0.1.x86_64                         8/9 \r\n\r  Verifying  : httpd-tools-2.4.51-1.amzn2.x86_64                            9/9 \r\n\r\nInstalled:\r\n  httpd.x86_64 0:2.4.51-1.amzn2                                                 \r\n\r\nDependency Installed:\r\n  apr.x86_64 0:1.7.0-9.amzn2                                                    \r\n  apr-util.x86_64 0:1.6.1-5.amzn2.0.2                                           \r\n  apr-util-bdb.x86_64 0:1.6.1-5.amzn2.0.2                                       \r\n  generic-logos-httpd.noarch 0:18.0.0-4.amzn2                                   \r\n  httpd-filesystem.noarch 0:2.4.51-1.amzn2                                      \r\n  httpd-tools.x86_64 0:2.4.51-1.amzn2                                           \r\n  mailcap.noarch 0:2.1.41-2.amzn2                                               \r\n  mod_http2.x86_64 0:1.15.19-1.amzn2.0.1                                        \r\n\r\nComplete!\r\n",
+    "stdout_lines": [
+        "Loaded plugins: extras_suggestions, langpacks, priorities, update-motd",
+        "Resolving Dependencies",
+        "--> Running transaction check",
+        "---> Package httpd.x86_64 0:2.4.51-1.amzn2 will be installed",
+        "--> Processing Dependency: httpd-tools = 2.4.51-1.amzn2 for package: httpd-2.4.51-1.amzn2.x86_64",
+        "--> Processing Dependency: httpd-filesystem = 2.4.51-1.amzn2 for package: httpd-2.4.51-1.amzn2.x86_64",
+        "--> Processing Dependency: system-logos-httpd for package: httpd-2.4.51-1.amzn2.x86_64",
+        "--> Processing Dependency: mod_http2 for package: httpd-2.4.51-1.amzn2.x86_64",
+        "--> Processing Dependency: httpd-filesystem for package: httpd-2.4.51-1.amzn2.x86_64",
+        "--> Processing Dependency: /etc/mime.types for package: httpd-2.4.51-1.amzn2.x86_64",
+        "--> Processing Dependency: libaprutil-1.so.0()(64bit) for package: httpd-2.4.51-1.amzn2.x86_64",
+        "--> Processing Dependency: libapr-1.so.0()(64bit) for package: httpd-2.4.51-1.amzn2.x86_64",
+        "--> Running transaction check",
+        "---> Package apr.x86_64 0:1.7.0-9.amzn2 will be installed",
+        "---> Package apr-util.x86_64 0:1.6.1-5.amzn2.0.2 will be installed",
+        "--> Processing Dependency: apr-util-bdb(x86-64) = 1.6.1-5.amzn2.0.2 for package: apr-util-1.6.1-5.amzn2.0.2.x86_64",
+        "---> Package generic-logos-httpd.noarch 0:18.0.0-4.amzn2 will be installed",
+        "---> Package httpd-filesystem.noarch 0:2.4.51-1.amzn2 will be installed",
+        "---> Package httpd-tools.x86_64 0:2.4.51-1.amzn2 will be installed",
+        "---> Package mailcap.noarch 0:2.1.41-2.amzn2 will be installed",
+        "---> Package mod_http2.x86_64 0:1.15.19-1.amzn2.0.1 will be installed",
+        "--> Running transaction check",
+        "---> Package apr-util-bdb.x86_64 0:1.6.1-5.amzn2.0.2 will be installed",
+        "--> Finished Dependency Resolution",
+        "",
+        "Dependencies Resolved",
+        "",
+        "================================================================================",
+        " Package                Arch      Version                   Repository     Size",
+        "================================================================================",
+        "Installing:",
+        " httpd                  x86_64    2.4.51-1.amzn2            amzn2-core    1.3 M",
+        "Installing for dependencies:",
+        " apr                    x86_64    1.7.0-9.amzn2             amzn2-core    122 k",
+        " apr-util               x86_64    1.6.1-5.amzn2.0.2         amzn2-core     99 k",
+        " apr-util-bdb           x86_64    1.6.1-5.amzn2.0.2         amzn2-core     19 k",
+        " generic-logos-httpd    noarch    18.0.0-4.amzn2            amzn2-core     19 k",
+        " httpd-filesystem       noarch    2.4.51-1.amzn2            amzn2-core     24 k",
+        " httpd-tools            x86_64    2.4.51-1.amzn2            amzn2-core     88 k",
+        " mailcap                noarch    2.1.41-2.amzn2            amzn2-core     31 k",
+        " mod_http2              x86_64    1.15.19-1.amzn2.0.1       amzn2-core    149 k",
+        "",
+        "Transaction Summary",
+        "================================================================================",
+        "Install  1 Package (+8 Dependent packages)",
+        "",
+        "Total download size: 1.9 M",
+        "Installed size: 5.2 M",
+        "Downloading packages:",
+        "",
+        "(1/9): apr-util-1.6.1-5.amzn2.0.2.x86_64.rpm               |  99 kB   00:00     ",
+        "",
+        "(2/9): apr-1.7.0-9.amzn2.x86_64.rpm                        | 122 kB   00:00     ",
+        "",
+        "(3/9): apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64.rpm           |  19 kB   00:00     ",
+        "",
+        "(4/9): generic-logos-httpd-18.0.0-4.amzn2.noarch.rpm       |  19 kB   00:00     ",
+        "",
+        "(5/9): httpd-filesystem-2.4.51-1.amzn2.noarch.rpm          |  24 kB   00:00     ",
+        "",
+        "(6/9): httpd-2.4.51-1.amzn2.x86_64.rpm                     | 1.3 MB   00:00     ",
+        "",
+        "(7/9): httpd-tools-2.4.51-1.amzn2.x86_64.rpm               |  88 kB   00:00     ",
+        "",
+        "(8/9): mailcap-2.1.41-2.amzn2.noarch.rpm                   |  31 kB   00:00     ",
+        "",
+        "(9/9): mod_http2-1.15.19-1.amzn2.0.1.x86_64.rpm            | 149 kB   00:00     ",
+        "--------------------------------------------------------------------------------",
+        "Total                                              9.9 MB/s | 1.9 MB  00:00     ",
+        "Running transaction check",
+        "Running transaction test",
+        "Transaction test succeeded",
+        "Running transaction",
+        "",
+        "  Installing : apr-1.7.0-9.amzn2.x86_64 [                                 ] 1/9",
+        "  Installing : apr-1.7.0-9.amzn2.x86_64 [########                         ] 1/9",
+        "  Installing : apr-1.7.0-9.amzn2.x86_64 [################                 ] 1/9",
+        "  Installing : apr-1.7.0-9.amzn2.x86_64 [########################         ] 1/9",
+        "  Installing : apr-1.7.0-9.amzn2.x86_64 [##############################   ] 1/9",
+        "  Installing : apr-1.7.0-9.amzn2.x86_64 [################################ ] 1/9",
+        "  Installing : apr-1.7.0-9.amzn2.x86_64                                     1/9 ",
+        "",
+        "  Installing : apr-util-bdb-1.6.1-5.amzn2.0 [                             ] 2/9",
+        "  Installing : apr-util-bdb-1.6.1-5.amzn2.0 [############################ ] 2/9",
+        "  Installing : apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64                        2/9 ",
+        "",
+        "  Installing : apr-util-1.6.1-5.amzn2.0.2.x [                             ] 3/9",
+        "  Installing : apr-util-1.6.1-5.amzn2.0.2.x [########                     ] 3/9",
+        "  Installing : apr-util-1.6.1-5.amzn2.0.2.x [#################            ] 3/9",
+        "  Installing : apr-util-1.6.1-5.amzn2.0.2.x [#########################    ] 3/9",
+        "  Installing : apr-util-1.6.1-5.amzn2.0.2.x [############################ ] 3/9",
+        "  Installing : apr-util-1.6.1-5.amzn2.0.2.x86_64                            3/9 ",
+        "",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x [                             ] 4/9",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x [#########                    ] 4/9",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x [############                 ] 4/9",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x [###############              ] 4/9",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x [##################           ] 4/9",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x [####################         ] 4/9",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x [######################       ] 4/9",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x [##########################   ] 4/9",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x [###########################  ] 4/9",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x [############################ ] 4/9",
+        "  Installing : httpd-tools-2.4.51-1.amzn2.x86_64                            4/9 ",
+        "",
+        "  Installing : generic-logos-httpd-18.0.0-4 [                             ] 5/9",
+        "  Installing : generic-logos-httpd-18.0.0-4 [########################     ] 5/9",
+        "  Installing : generic-logos-httpd-18.0.0-4 [############################ ] 5/9",
+        "  Installing : generic-logos-httpd-18.0.0-4.amzn2.noarch                    5/9 ",
+        "",
+        "  Installing : mailcap-2.1.41-2.amzn2.noarc [                             ] 6/9",
+        "  Installing : mailcap-2.1.41-2.amzn2.noarc [#######################      ] 6/9",
+        "  Installing : mailcap-2.1.41-2.amzn2.noarc [########################     ] 6/9",
+        "  Installing : mailcap-2.1.41-2.amzn2.noarc [##########################   ] 6/9",
+        "  Installing : mailcap-2.1.41-2.amzn2.noarc [############################ ] 6/9",
+        "  Installing : mailcap-2.1.41-2.amzn2.noarch                                6/9 ",
+        "",
+        "  Installing : httpd-filesystem-2.4.51-1.am [                             ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.am [#                            ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.am [####                         ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.am [###########                  ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.am [##############               ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.am [################             ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.am [##################           ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.am [####################         ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.am [######################       ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.am [########################     ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.am [##########################   ] 7/9",
+        "  Installing : httpd-filesystem-2.4.51-1.amzn2.noarch                       7/9 ",
+        "",
+        "  Installing : mod_http2-1.15.19-1.amzn2.0. [                             ] 8/9",
+        "  Installing : mod_http2-1.15.19-1.amzn2.0. [####                         ] 8/9",
+        "  Installing : mod_http2-1.15.19-1.amzn2.0. [#########                    ] 8/9",
+        "  Installing : mod_http2-1.15.19-1.amzn2.0. [##############               ] 8/9",
+        "  Installing : mod_http2-1.15.19-1.amzn2.0. [##################           ] 8/9",
+        "  Installing : mod_http2-1.15.19-1.amzn2.0. [######################       ] 8/9",
+        "  Installing : mod_http2-1.15.19-1.amzn2.0. [###########################  ] 8/9",
+        "  Installing : mod_http2-1.15.19-1.amzn2.0. [############################ ] 8/9",
+        "  Installing : mod_http2-1.15.19-1.amzn2.0.1.x86_64                         8/9 ",
+        "",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [                              ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [#                             ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [##                            ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [###                           ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [####                          ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [#####                         ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [######                        ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [#######                       ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [########                      ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [#########                     ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [##########                    ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [###########                   ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [############                  ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [#############                 ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [##############                ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [###############               ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [################              ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [#################             ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [##################            ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [###################           ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [####################          ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [#####################         ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [######################        ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [#######################       ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [########################      ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [#########################     ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [##########################    ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [###########################   ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [############################  ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64 [############################# ] 9/9",
+        "  Installing : httpd-2.4.51-1.amzn2.x86_64                                  9/9 ",
+        "",
+        "  Verifying  : apr-util-1.6.1-5.amzn2.0.2.x86_64                            1/9 ",
+        "",
+        "  Verifying  : httpd-2.4.51-1.amzn2.x86_64                                  2/9 ",
+        "",
+        "  Verifying  : apr-util-bdb-1.6.1-5.amzn2.0.2.x86_64                        3/9 ",
+        "",
+        "  Verifying  : httpd-filesystem-2.4.51-1.amzn2.noarch                       4/9 ",
+        "",
+        "  Verifying  : apr-1.7.0-9.amzn2.x86_64                                     5/9 ",
+        "",
+        "  Verifying  : mailcap-2.1.41-2.amzn2.noarch                                6/9 ",
+        "",
+        "  Verifying  : generic-logos-httpd-18.0.0-4.amzn2.noarch                    7/9 ",
+        "",
+        "  Verifying  : mod_http2-1.15.19-1.amzn2.0.1.x86_64                         8/9 ",
+        "",
+        "  Verifying  : httpd-tools-2.4.51-1.amzn2.x86_64                            9/9 ",
+        "",
+        "Installed:",
+        "  httpd.x86_64 0:2.4.51-1.amzn2                                                 ",
+        "",
+        "Dependency Installed:",
+        "  apr.x86_64 0:1.7.0-9.amzn2                                                    ",
+        "  apr-util.x86_64 0:1.6.1-5.amzn2.0.2                                           ",
+        "  apr-util-bdb.x86_64 0:1.6.1-5.amzn2.0.2                                       ",
+        "  generic-logos-httpd.noarch 0:18.0.0-4.amzn2                                   ",
+        "  httpd-filesystem.noarch 0:2.4.51-1.amzn2                                      ",
+        "  httpd-tools.x86_64 0:2.4.51-1.amzn2                                           ",
+        "  mailcap.noarch 0:2.1.41-2.amzn2                                               ",
+        "  mod_http2.x86_64 0:1.15.19-1.amzn2.0.1                                        ",
+        "",
+        "Complete!"
+    ]
+}
+
+TASK [fromgit : Start Apache service] *********************************************************************
+task path: /root/ansible_test/roles/fromgit/tasks/main.yml:6
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 -tt 52.87.242.93 'sudo -H -S -n  -u root /bin/sh -c '"'"'echo BECOME-SUCCESS-agspuyslmsnijaohbeznlsxutizgwbpb ; systemctl start httpd'"'"''
+Escalation succeeded
+<52.87.242.93> (0, '', 'Shared connection to 52.87.242.93 closed.\r\n')
+changed: [52.87.242.93] => {
+    "changed": true,
+    "rc": 0,
+    "stderr": "Shared connection to 52.87.242.93 closed.\r\n",
+    "stderr_lines": [
+        "Shared connection to 52.87.242.93 closed."
+    ],
+    "stdout": "",
+    "stdout_lines": []
+}
+
+TASK [fromgit : Install firewalld] ************************************************************************
+task path: /root/ansible_test/roles/fromgit/tasks/main.yml:9
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 -tt 52.87.242.93 'sudo -H -S -n  -u root /bin/sh -c '"'"'echo BECOME-SUCCESS-aqpqlzqblrjvbxyqbwmpwjqksmxxnatn ; yum -y install firewalld'"'"''
+Escalation succeeded
+<52.87.242.93> (0, 'Loaded plugins: extras_suggestions, langpacks, priorities, update-motd\r\nExisting lock /var/run/yum.pid: another copy is running as pid 3267.\r\nAnother app is currently holding the yum lock; waiting for it to exit...\r\n  The other application is: yum\r\n    Memory :  89 M RSS (305 MB VSZ)\r\n    Started: Sat Oct 23 21:48:17 2021 - 00:02 ago\r\n    State  : Running, pid: 3267\r\nAnother app is currently holding the yum lock; waiting for it to exit...\r\n  The other application is: yum\r\n    Memory : 152 M RSS (369 MB VSZ)\r\n    Started: Sat Oct 23 21:48:17 2021 - 00:04 ago\r\n    State  : Running, pid: 3267\r\nResolving Dependencies\r\n--> Running transaction check\r\n---> Package firewalld.noarch 0:0.4.4.4-6.amzn2.0.1 will be installed\r\n--> Processing Dependency: python-firewall = 0.4.4.4-6.amzn2.0.1 for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: firewalld-filesystem = 0.4.4.4-6.amzn2.0.1 for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: ipset for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: ebtables for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Running transaction check\r\n---> Package ebtables.x86_64 0:2.0.10-16.amzn2.0.1 will be installed\r\n---> Package firewalld-filesystem.noarch 0:0.4.4.4-6.amzn2.0.1 will be installed\r\n---> Package ipset.x86_64 0:6.29-1.amzn2.0.1 will be installed\r\n--> Processing Dependency: ipset-libs(x86-64) = 6.29-1.amzn2.0.1 for package: ipset-6.29-1.amzn2.0.1.x86_64\r\n--> Processing Dependency: libipset.so.3(LIBIPSET_3.0)(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64\r\n--> Processing Dependency: libipset.so.3(LIBIPSET_2.0)(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64\r\n--> Processing Dependency: libipset.so.3(LIBIPSET_1.0)(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64\r\n--> Processing Dependency: libipset.so.3()(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64\r\n---> Package python-firewall.noarch 0:0.4.4.4-6.amzn2.0.1 will be installed\r\n--> Processing Dependency: python-slip-dbus for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: python-decorator for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: pygobject3-base for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: dbus-python for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Running transaction check\r\n---> Package dbus-python.x86_64 0:1.1.1-9.amzn2.0.2 will be installed\r\n--> Processing Dependency: libdbus-glib-1.so.2()(64bit) for package: dbus-python-1.1.1-9.amzn2.0.2.x86_64\r\n---> Package ipset-libs.x86_64 0:6.29-1.amzn2.0.1 will be installed\r\n---> Package python-decorator.noarch 0:3.4.0-3.amzn2 will be installed\r\n---> Package python-gobject-base.x86_64 0:3.22.0-1.amzn2.1 will be installed\r\n--> Processing Dependency: gobject-introspection(x86-64) >= 1.46.0 for package: python-gobject-base-3.22.0-1.amzn2.1.x86_64\r\n--> Processing Dependency: libgirepository-1.0.so.1()(64bit) for package: python-gobject-base-3.22.0-1.amzn2.1.x86_64\r\n---> Package python-slip-dbus.noarch 0:0.4.0-4.amzn2 will be installed\r\n--> Processing Dependency: python-slip = 0.4.0-4.amzn2 for package: python-slip-dbus-0.4.0-4.amzn2.noarch\r\n--> Running transaction check\r\n---> Package dbus-glib.x86_64 0:0.100-7.2.amzn2 will be installed\r\n---> Package gobject-introspection.x86_64 0:1.56.1-1.amzn2 will be installed\r\n---> Package python-slip.noarch 0:0.4.0-4.amzn2 will be installed\r\n--> Processing Dependency: libselinux-python for package: python-slip-0.4.0-4.amzn2.noarch\r\n--> Running transaction check\r\n---> Package libselinux-python.x86_64 0:2.5-12.amzn2.0.2 will be installed\r\n--> Finished Dependency Resolution\r\n\r\nDependencies Resolved\r\n\r\n================================================================================\r\n Package                  Arch      Version                 Repository     Size\r\n================================================================================\r\nInstalling:\r\n firewalld                noarch    0.4.4.4-6.amzn2.0.1     amzn2-core    416 k\r\nInstalling for dependencies:\r\n dbus-glib                x86_64    0.100-7.2.amzn2         amzn2-core    103 k\r\n dbus-python              x86_64    1.1.1-9.amzn2.0.2       amzn2-core    206 k\r\n ebtables                 x86_64    2.0.10-16.amzn2.0.1     amzn2-core    122 k\r\n firewalld-filesystem     noarch    0.4.4.4-6.amzn2.0.1     amzn2-core     47 k\r\n gobject-introspection    x86_64    1.56.1-1.amzn2          amzn2-core    242 k\r\n ipset                    x86_64    6.29-1.amzn2.0.1        amzn2-core     41 k\r\n ipset-libs               x86_64    6.29-1.amzn2.0.1        amzn2-core     54 k\r\n libselinux-python        x86_64    2.5-12.amzn2.0.2        amzn2-core    237 k\r\n python-decorator         noarch    3.4.0-3.amzn2           amzn2-core     27 k\r\n python-firewall          noarch    0.4.4.4-6.amzn2.0.1     amzn2-core    326 k\r\n python-gobject-base      x86_64    3.22.0-1.amzn2.1        amzn2-core    293 k\r\n python-slip              noarch    0.4.0-4.amzn2           amzn2-core     31 k\r\n python-slip-dbus         noarch    0.4.0-4.amzn2           amzn2-core     32 k\r\n\r\nTransaction Summary\r\n================================================================================\r\nInstall  1 Package (+13 Dependent packages)\r\n\r\nTotal download size: 2.1 M\r\nInstalled size: 7.9 M\r\nDownloading packages:\r\n\r(1/14): dbus-glib-0.100-7.2.amzn2.x86_64.rpm               | 103 kB   00:00     \r\n\r(2/14): dbus-python-1.1.1-9.amzn2.0.2.x86_64.rpm           | 206 kB   00:00     \r\n\r(3/14): ebtables-2.0.10-16.amzn2.0.1.x86_64.rpm            | 122 kB   00:00     \r\n\r(4/14): firewalld-filesystem-0.4.4.4-6.amzn2.0.1.noarch.rp |  47 kB   00:00     \r\n\r(5/14): gobject-introspection-1.56.1-1.amzn2.x86_64.rpm    | 242 kB   00:00     \r\n\r(6/14): firewalld-0.4.4.4-6.amzn2.0.1.noarch.rpm           | 416 kB   00:00     \r\n\r(7/14): ipset-6.29-1.amzn2.0.1.x86_64.rpm                  |  41 kB   00:00     \r\n\r(8/14): ipset-libs-6.29-1.amzn2.0.1.x86_64.rpm             |  54 kB   00:00     \r\n\r(9/14): libselinux-python-2.5-12.amzn2.0.2.x86_64.rpm      | 237 kB   00:00     \r\n\r(10/14): python-decorator-3.4.0-3.amzn2.noarch.rpm         |  27 kB   00:00     \r\n\r(11/14): python-firewall-0.4.4.4-6.amzn2.0.1.noarch.rpm    | 326 kB   00:00     \r\n\r(12/14): python-slip-0.4.0-4.amzn2.noarch.rpm              |  31 kB   00:00     \r\n\r(13/14): python-gobject-base-3.22.0-1.amzn2.1.x86_64.rpm   | 293 kB   00:00     \r\n\r(14/14): python-slip-dbus-0.4.0-4.amzn2.noarch.rpm         |  32 kB   00:00     \r\n--------------------------------------------------------------------------------\r\nTotal                                              7.2 MB/s | 2.1 MB  00:00     \r\nRunning transaction check\r\nRunning transaction test\r\nTransaction test succeeded\r\nRunning transaction\r\n\r  Installing : python-decorator-3.4.0-3.am [                            ]  1/14\r  Installing : python-decorator-3.4.0-3.am [#                           ]  1/14\r  Installing : python-decorator-3.4.0-3.am [#####                       ]  1/14\r  Installing : python-decorator-3.4.0-3.am [#########                   ]  1/14\r  Installing : python-decorator-3.4.0-3.am [############                ]  1/14\r  Installing : python-decorator-3.4.0-3.am [#############               ]  1/14\r  Installing : python-decorator-3.4.0-3.am [########################### ]  1/14\r  Installing : python-decorator-3.4.0-3.amzn2.noarch                       1/14 \r\n\r  Installing : gobject-introspection-1.56. [                            ]  2/14\r  Installing : gobject-introspection-1.56. [###                         ]  2/14\r  Installing : gobject-introspection-1.56. [#####                       ]  2/14\r  Installing : gobject-introspection-1.56. [#######                     ]  2/14\r  Installing : gobject-introspection-1.56. [########                    ]  2/14\r  Installing : gobject-introspection-1.56. [###########                 ]  2/14\r  Installing : gobject-introspection-1.56. [#############               ]  2/14\r  Installing : gobject-introspection-1.56. [###############             ]  2/14\r  Installing : gobject-introspection-1.56. [#################           ]  2/14\r  Installing : gobject-introspection-1.56. [###################         ]  2/14\r  Installing : gobject-introspection-1.56. [####################        ]  2/14\r  Installing : gobject-introspection-1.56. [######################      ]  2/14\r  Installing : gobject-introspection-1.56. [#########################   ]  2/14\r  Installing : gobject-introspection-1.56. [########################### ]  2/14\r  Installing : gobject-introspection-1.56.1-1.amzn2.x86_64                 2/14 \r\n\r  Installing : python-gobject-base-3.22.0- [                            ]  3/14\r  Installing : python-gobject-base-3.22.0- [#                           ]  3/14\r  Installing : python-gobject-base-3.22.0- [###                         ]  3/14\r  Installing : python-gobject-base-3.22.0- [#####                       ]  3/14\r  Installing : python-gobject-base-3.22.0- [######                      ]  3/14\r  Installing : python-gobject-base-3.22.0- [########                    ]  3/14\r  Installing : python-gobject-base-3.22.0- [#########                   ]  3/14\r  Installing : python-gobject-base-3.22.0- [##########                  ]  3/14\r  Installing : python-gobject-base-3.22.0- [###########                 ]  3/14\r  Installing : python-gobject-base-3.22.0- [############                ]  3/14\r  Installing : python-gobject-base-3.22.0- [#############               ]  3/14\r  Installing : python-gobject-base-3.22.0- [##############              ]  3/14\r  Installing : python-gobject-base-3.22.0- [###############             ]  3/14\r  Installing : python-gobject-base-3.22.0- [################            ]  3/14\r  Installing : python-gobject-base-3.22.0- [#################           ]  3/14\r  Installing : python-gobject-base-3.22.0- [##################          ]  3/14\r  Installing : python-gobject-base-3.22.0- [####################        ]  3/14\r  Installing : python-gobject-base-3.22.0- [#####################       ]  3/14\r  Installing : python-gobject-base-3.22.0- [######################      ]  3/14\r  Installing : python-gobject-base-3.22.0- [#######################     ]  3/14\r  Installing : python-gobject-base-3.22.0- [########################    ]  3/14\r  Installing : python-gobject-base-3.22.0- [#########################   ]  3/14\r  Installing : python-gobject-base-3.22.0- [##########################  ]  3/14\r  Installing : python-gobject-base-3.22.0- [########################### ]  3/14\r  Installing : python-gobject-base-3.22.0-1.amzn2.1.x86_64                 3/14 \r\n\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [                            ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [######                      ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [#############               ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [####################        ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [##########################  ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [########################### ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1.x86_64                          4/14 \r\n\r  Installing : ipset-6.29-1.amzn2.0.1.x86_ [                            ]  5/14\r  Installing : ipset-6.29-1.amzn2.0.1.x86_ [########                    ]  5/14\r  Installing : ipset-6.29-1.amzn2.0.1.x86_ [###############             ]  5/14\r  Installing : ipset-6.29-1.amzn2.0.1.x86_ [########################    ]  5/14\r  Installing : ipset-6.29-1.amzn2.0.1.x86_ [########################### ]  5/14\r  Installing : ipset-6.29-1.amzn2.0.1.x86_64                               5/14 \r\n\r  Installing : ebtables-2.0.10-16.amzn2.0. [                            ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [#                           ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [##                          ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [###                         ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [####                        ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [######                      ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [#######                     ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [########                    ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [#########                   ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [##########                  ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [###########                 ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [############                ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [##############              ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [###############             ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [################            ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [#################           ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [######################      ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [#######################     ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [########################    ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [##########################  ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [########################### ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0.1.x86_64                         6/14 \r\n\r  Installing : libselinux-python-2.5-12.am [                            ]  7/14\r  Installing : libselinux-python-2.5-12.am [##                          ]  7/14\r  Installing : libselinux-python-2.5-12.am [#####                       ]  7/14\r  Installing : libselinux-python-2.5-12.am [########                    ]  7/14\r  Installing : libselinux-python-2.5-12.am [###########                 ]  7/14\r  Installing : libselinux-python-2.5-12.am [##############              ]  7/14\r  Installing : libselinux-python-2.5-12.am [#################           ]  7/14\r  Installing : libselinux-python-2.5-12.am [###################         ]  7/14\r  Installing : libselinux-python-2.5-12.am [######################      ]  7/14\r  Installing : libselinux-python-2.5-12.am [########################    ]  7/14\r  Installing : libselinux-python-2.5-12.am [########################### ]  7/14\r  Installing : libselinux-python-2.5-12.amzn2.0.2.x86_64                   7/14 \r\n\r  Installing : python-slip-0.4.0-4.amzn2.n [                            ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [#                           ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [####                        ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [######                      ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [########                    ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [###########                 ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [###################         ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [####################        ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [#####################       ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [######################      ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [#######################     ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [########################    ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [#########################   ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [########################### ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.noarch                            8/14 \r\n\r  Installing : dbus-glib-0.100-7.2.amzn2.x [                            ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [######                      ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [########                    ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [##############              ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [#####################       ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [########################    ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [########################### ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x86_64                            9/14 \r\n\r  Installing : dbus-python-1.1.1-9.amzn2.0 [                            ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#                           ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [####                        ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#####                       ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [######                      ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#######                     ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [########                    ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#########                   ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [##########                  ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [###########                 ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#############               ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [###############             ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#################           ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [###################         ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#####################       ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [######################      ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#######################     ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [########################    ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#########################   ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [##########################  ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [########################### ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0.2.x86_64                       10/14 \r\n\r  Installing : python-slip-dbus-0.4.0-4.am [                            ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#                           ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [##                          ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [###                         ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [######                      ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [##########                  ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#############               ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [##############              ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [################            ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#################           ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [##################          ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [###################         ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [####################        ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#####################       ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#######################     ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [########################    ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#########################   ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [########################### ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.amzn2.noarch                      11/14 \r\n\r  Installing : python-firewall-0.4.4.4-6.a [                            ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#                           ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [##                          ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [###                         ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [####                        ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#####                       ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [######                      ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#######                     ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [########                    ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#########                   ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [##########                  ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [###########                 ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [############                ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#############               ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [##############              ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [###############             ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [################            ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#################           ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [##################          ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [###################         ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [####################        ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#####################       ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [######################      ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#######################     ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [########################    ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#########################   ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [##########################  ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [########################### ] 12/14\r  Installing : python-firewall-0.4.4.4-6.amzn2.0.1.noarch                 12/14 \r\n\r  Installing : firewalld-filesystem-0.4.4. [                            ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [##                          ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [#####                       ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [#######                     ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [##########                  ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [############                ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [###############             ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [##################          ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [#########################   ] 13/14\r  Installing : firewalld-filesystem-0.4.4.4-6.amzn2.0.1.noarch            13/14 \r\n\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [                            ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#                           ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [##                          ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [###                         ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [####                        ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#####                       ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [######                      ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#######                     ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [########                    ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#########                   ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [##########                  ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [###########                 ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [############                ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#############               ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [##############              ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [###############             ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [################            ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#################           ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [##################          ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [###################         ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [####################        ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#####################       ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [######################      ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#######################     ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [########################    ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#########################   ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [##########################  ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [########################### ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0.1.noarch                       14/14 \r\n\r  Verifying  : python-slip-dbus-0.4.0-4.amzn2.noarch                       1/14 \r\n\r  Verifying  : firewalld-filesystem-0.4.4.4-6.amzn2.0.1.noarch             2/14 \r\n\r  Verifying  : firewalld-0.4.4.4-6.amzn2.0.1.noarch                        3/14 \r\n\r  Verifying  : dbus-glib-0.100-7.2.amzn2.x86_64                            4/14 \r\n\r  Verifying  : libselinux-python-2.5-12.amzn2.0.2.x86_64                   5/14 \r\n\r  Verifying  : python-decorator-3.4.0-3.amzn2.noarch                       6/14 \r\n\r  Verifying  : python-gobject-base-3.22.0-1.amzn2.1.x86_64                 7/14 \r\n\r  Verifying  : ebtables-2.0.10-16.amzn2.0.1.x86_64                         8/14 \r\n\r  Verifying  : python-slip-0.4.0-4.amzn2.noarch                            9/14 \r\n\r  Verifying  : ipset-libs-6.29-1.amzn2.0.1.x86_64                         10/14 \r\n\r  Verifying  : python-firewall-0.4.4.4-6.amzn2.0.1.noarch                 11/14 \r\n\r  Verifying  : dbus-python-1.1.1-9.amzn2.0.2.x86_64                       12/14 \r\n\r  Verifying  : ipset-6.29-1.amzn2.0.1.x86_64                              13/14 \r\n\r  Verifying  : gobject-introspection-1.56.1-1.amzn2.x86_64                14/14 \r\n\r\nInstalled:\r\n  firewalld.noarch 0:0.4.4.4-6.amzn2.0.1                                        \r\n\r\nDependency Installed:\r\n  dbus-glib.x86_64 0:0.100-7.2.amzn2                                            \r\n  dbus-python.x86_64 0:1.1.1-9.amzn2.0.2                                        \r\n  ebtables.x86_64 0:2.0.10-16.amzn2.0.1                                         \r\n  firewalld-filesystem.noarch 0:0.4.4.4-6.amzn2.0.1                             \r\n  gobject-introspection.x86_64 0:1.56.1-1.amzn2                                 \r\n  ipset.x86_64 0:6.29-1.amzn2.0.1                                               \r\n  ipset-libs.x86_64 0:6.29-1.amzn2.0.1                                          \r\n  libselinux-python.x86_64 0:2.5-12.amzn2.0.2                                   \r\n  python-decorator.noarch 0:3.4.0-3.amzn2                                       \r\n  python-firewall.noarch 0:0.4.4.4-6.amzn2.0.1                                  \r\n  python-gobject-base.x86_64 0:3.22.0-1.amzn2.1                                 \r\n  python-slip.noarch 0:0.4.0-4.amzn2                                            \r\n  python-slip-dbus.noarch 0:0.4.0-4.amzn2                                       \r\n\r\nComplete!\r\n', 'Shared connection to 52.87.242.93 closed.\r\n')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 -tt 52.87.242.93 'sudo -H -S -n  -u root /bin/sh -c '"'"'echo BECOME-SUCCESS-lexaxwbmfizznxatwiodxilpddhgbjqh ; yum -y install ipset'"'"''
+changed: [52.87.242.93] => (item=firewalld) => {
+    "ansible_loop_var": "item",
+    "changed": true,
+    "item": "firewalld",
+    "rc": 0,
+    "stderr": "Shared connection to 52.87.242.93 closed.\r\n",
+    "stderr_lines": [
+        "Shared connection to 52.87.242.93 closed."
+    ],
+    "stdout": "Loaded plugins: extras_suggestions, langpacks, priorities, update-motd\r\nExisting lock /var/run/yum.pid: another copy is running as pid 3267.\r\nAnother app is currently holding the yum lock; waiting for it to exit...\r\n  The other application is: yum\r\n    Memory :  89 M RSS (305 MB VSZ)\r\n    Started: Sat Oct 23 21:48:17 2021 - 00:02 ago\r\n    State  : Running, pid: 3267\r\nAnother app is currently holding the yum lock; waiting for it to exit...\r\n  The other application is: yum\r\n    Memory : 152 M RSS (369 MB VSZ)\r\n    Started: Sat Oct 23 21:48:17 2021 - 00:04 ago\r\n    State  : Running, pid: 3267\r\nResolving Dependencies\r\n--> Running transaction check\r\n---> Package firewalld.noarch 0:0.4.4.4-6.amzn2.0.1 will be installed\r\n--> Processing Dependency: python-firewall = 0.4.4.4-6.amzn2.0.1 for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: firewalld-filesystem = 0.4.4.4-6.amzn2.0.1 for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: ipset for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: ebtables for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Running transaction check\r\n---> Package ebtables.x86_64 0:2.0.10-16.amzn2.0.1 will be installed\r\n---> Package firewalld-filesystem.noarch 0:0.4.4.4-6.amzn2.0.1 will be installed\r\n---> Package ipset.x86_64 0:6.29-1.amzn2.0.1 will be installed\r\n--> Processing Dependency: ipset-libs(x86-64) = 6.29-1.amzn2.0.1 for package: ipset-6.29-1.amzn2.0.1.x86_64\r\n--> Processing Dependency: libipset.so.3(LIBIPSET_3.0)(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64\r\n--> Processing Dependency: libipset.so.3(LIBIPSET_2.0)(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64\r\n--> Processing Dependency: libipset.so.3(LIBIPSET_1.0)(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64\r\n--> Processing Dependency: libipset.so.3()(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64\r\n---> Package python-firewall.noarch 0:0.4.4.4-6.amzn2.0.1 will be installed\r\n--> Processing Dependency: python-slip-dbus for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: python-decorator for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: pygobject3-base for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Processing Dependency: dbus-python for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch\r\n--> Running transaction check\r\n---> Package dbus-python.x86_64 0:1.1.1-9.amzn2.0.2 will be installed\r\n--> Processing Dependency: libdbus-glib-1.so.2()(64bit) for package: dbus-python-1.1.1-9.amzn2.0.2.x86_64\r\n---> Package ipset-libs.x86_64 0:6.29-1.amzn2.0.1 will be installed\r\n---> Package python-decorator.noarch 0:3.4.0-3.amzn2 will be installed\r\n---> Package python-gobject-base.x86_64 0:3.22.0-1.amzn2.1 will be installed\r\n--> Processing Dependency: gobject-introspection(x86-64) >= 1.46.0 for package: python-gobject-base-3.22.0-1.amzn2.1.x86_64\r\n--> Processing Dependency: libgirepository-1.0.so.1()(64bit) for package: python-gobject-base-3.22.0-1.amzn2.1.x86_64\r\n---> Package python-slip-dbus.noarch 0:0.4.0-4.amzn2 will be installed\r\n--> Processing Dependency: python-slip = 0.4.0-4.amzn2 for package: python-slip-dbus-0.4.0-4.amzn2.noarch\r\n--> Running transaction check\r\n---> Package dbus-glib.x86_64 0:0.100-7.2.amzn2 will be installed\r\n---> Package gobject-introspection.x86_64 0:1.56.1-1.amzn2 will be installed\r\n---> Package python-slip.noarch 0:0.4.0-4.amzn2 will be installed\r\n--> Processing Dependency: libselinux-python for package: python-slip-0.4.0-4.amzn2.noarch\r\n--> Running transaction check\r\n---> Package libselinux-python.x86_64 0:2.5-12.amzn2.0.2 will be installed\r\n--> Finished Dependency Resolution\r\n\r\nDependencies Resolved\r\n\r\n================================================================================\r\n Package                  Arch      Version                 Repository     Size\r\n================================================================================\r\nInstalling:\r\n firewalld                noarch    0.4.4.4-6.amzn2.0.1     amzn2-core    416 k\r\nInstalling for dependencies:\r\n dbus-glib                x86_64    0.100-7.2.amzn2         amzn2-core    103 k\r\n dbus-python              x86_64    1.1.1-9.amzn2.0.2       amzn2-core    206 k\r\n ebtables                 x86_64    2.0.10-16.amzn2.0.1     amzn2-core    122 k\r\n firewalld-filesystem     noarch    0.4.4.4-6.amzn2.0.1     amzn2-core     47 k\r\n gobject-introspection    x86_64    1.56.1-1.amzn2          amzn2-core    242 k\r\n ipset                    x86_64    6.29-1.amzn2.0.1        amzn2-core     41 k\r\n ipset-libs               x86_64    6.29-1.amzn2.0.1        amzn2-core     54 k\r\n libselinux-python        x86_64    2.5-12.amzn2.0.2        amzn2-core    237 k\r\n python-decorator         noarch    3.4.0-3.amzn2           amzn2-core     27 k\r\n python-firewall          noarch    0.4.4.4-6.amzn2.0.1     amzn2-core    326 k\r\n python-gobject-base      x86_64    3.22.0-1.amzn2.1        amzn2-core    293 k\r\n python-slip              noarch    0.4.0-4.amzn2           amzn2-core     31 k\r\n python-slip-dbus         noarch    0.4.0-4.amzn2           amzn2-core     32 k\r\n\r\nTransaction Summary\r\n================================================================================\r\nInstall  1 Package (+13 Dependent packages)\r\n\r\nTotal download size: 2.1 M\r\nInstalled size: 7.9 M\r\nDownloading packages:\r\n\r(1/14): dbus-glib-0.100-7.2.amzn2.x86_64.rpm               | 103 kB   00:00     \r\n\r(2/14): dbus-python-1.1.1-9.amzn2.0.2.x86_64.rpm           | 206 kB   00:00     \r\n\r(3/14): ebtables-2.0.10-16.amzn2.0.1.x86_64.rpm            | 122 kB   00:00     \r\n\r(4/14): firewalld-filesystem-0.4.4.4-6.amzn2.0.1.noarch.rp |  47 kB   00:00     \r\n\r(5/14): gobject-introspection-1.56.1-1.amzn2.x86_64.rpm    | 242 kB   00:00     \r\n\r(6/14): firewalld-0.4.4.4-6.amzn2.0.1.noarch.rpm           | 416 kB   00:00     \r\n\r(7/14): ipset-6.29-1.amzn2.0.1.x86_64.rpm                  |  41 kB   00:00     \r\n\r(8/14): ipset-libs-6.29-1.amzn2.0.1.x86_64.rpm             |  54 kB   00:00     \r\n\r(9/14): libselinux-python-2.5-12.amzn2.0.2.x86_64.rpm      | 237 kB   00:00     \r\n\r(10/14): python-decorator-3.4.0-3.amzn2.noarch.rpm         |  27 kB   00:00     \r\n\r(11/14): python-firewall-0.4.4.4-6.amzn2.0.1.noarch.rpm    | 326 kB   00:00     \r\n\r(12/14): python-slip-0.4.0-4.amzn2.noarch.rpm              |  31 kB   00:00     \r\n\r(13/14): python-gobject-base-3.22.0-1.amzn2.1.x86_64.rpm   | 293 kB   00:00     \r\n\r(14/14): python-slip-dbus-0.4.0-4.amzn2.noarch.rpm         |  32 kB   00:00     \r\n--------------------------------------------------------------------------------\r\nTotal                                              7.2 MB/s | 2.1 MB  00:00     \r\nRunning transaction check\r\nRunning transaction test\r\nTransaction test succeeded\r\nRunning transaction\r\n\r  Installing : python-decorator-3.4.0-3.am [                            ]  1/14\r  Installing : python-decorator-3.4.0-3.am [#                           ]  1/14\r  Installing : python-decorator-3.4.0-3.am [#####                       ]  1/14\r  Installing : python-decorator-3.4.0-3.am [#########                   ]  1/14\r  Installing : python-decorator-3.4.0-3.am [############                ]  1/14\r  Installing : python-decorator-3.4.0-3.am [#############               ]  1/14\r  Installing : python-decorator-3.4.0-3.am [########################### ]  1/14\r  Installing : python-decorator-3.4.0-3.amzn2.noarch                       1/14 \r\n\r  Installing : gobject-introspection-1.56. [                            ]  2/14\r  Installing : gobject-introspection-1.56. [###                         ]  2/14\r  Installing : gobject-introspection-1.56. [#####                       ]  2/14\r  Installing : gobject-introspection-1.56. [#######                     ]  2/14\r  Installing : gobject-introspection-1.56. [########                    ]  2/14\r  Installing : gobject-introspection-1.56. [###########                 ]  2/14\r  Installing : gobject-introspection-1.56. [#############               ]  2/14\r  Installing : gobject-introspection-1.56. [###############             ]  2/14\r  Installing : gobject-introspection-1.56. [#################           ]  2/14\r  Installing : gobject-introspection-1.56. [###################         ]  2/14\r  Installing : gobject-introspection-1.56. [####################        ]  2/14\r  Installing : gobject-introspection-1.56. [######################      ]  2/14\r  Installing : gobject-introspection-1.56. [#########################   ]  2/14\r  Installing : gobject-introspection-1.56. [########################### ]  2/14\r  Installing : gobject-introspection-1.56.1-1.amzn2.x86_64                 2/14 \r\n\r  Installing : python-gobject-base-3.22.0- [                            ]  3/14\r  Installing : python-gobject-base-3.22.0- [#                           ]  3/14\r  Installing : python-gobject-base-3.22.0- [###                         ]  3/14\r  Installing : python-gobject-base-3.22.0- [#####                       ]  3/14\r  Installing : python-gobject-base-3.22.0- [######                      ]  3/14\r  Installing : python-gobject-base-3.22.0- [########                    ]  3/14\r  Installing : python-gobject-base-3.22.0- [#########                   ]  3/14\r  Installing : python-gobject-base-3.22.0- [##########                  ]  3/14\r  Installing : python-gobject-base-3.22.0- [###########                 ]  3/14\r  Installing : python-gobject-base-3.22.0- [############                ]  3/14\r  Installing : python-gobject-base-3.22.0- [#############               ]  3/14\r  Installing : python-gobject-base-3.22.0- [##############              ]  3/14\r  Installing : python-gobject-base-3.22.0- [###############             ]  3/14\r  Installing : python-gobject-base-3.22.0- [################            ]  3/14\r  Installing : python-gobject-base-3.22.0- [#################           ]  3/14\r  Installing : python-gobject-base-3.22.0- [##################          ]  3/14\r  Installing : python-gobject-base-3.22.0- [####################        ]  3/14\r  Installing : python-gobject-base-3.22.0- [#####################       ]  3/14\r  Installing : python-gobject-base-3.22.0- [######################      ]  3/14\r  Installing : python-gobject-base-3.22.0- [#######################     ]  3/14\r  Installing : python-gobject-base-3.22.0- [########################    ]  3/14\r  Installing : python-gobject-base-3.22.0- [#########################   ]  3/14\r  Installing : python-gobject-base-3.22.0- [##########################  ]  3/14\r  Installing : python-gobject-base-3.22.0- [########################### ]  3/14\r  Installing : python-gobject-base-3.22.0-1.amzn2.1.x86_64                 3/14 \r\n\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [                            ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [######                      ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [#############               ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [####################        ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [##########################  ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1 [########################### ]  4/14\r  Installing : ipset-libs-6.29-1.amzn2.0.1.x86_64                          4/14 \r\n\r  Installing : ipset-6.29-1.amzn2.0.1.x86_ [                            ]  5/14\r  Installing : ipset-6.29-1.amzn2.0.1.x86_ [########                    ]  5/14\r  Installing : ipset-6.29-1.amzn2.0.1.x86_ [###############             ]  5/14\r  Installing : ipset-6.29-1.amzn2.0.1.x86_ [########################    ]  5/14\r  Installing : ipset-6.29-1.amzn2.0.1.x86_ [########################### ]  5/14\r  Installing : ipset-6.29-1.amzn2.0.1.x86_64                               5/14 \r\n\r  Installing : ebtables-2.0.10-16.amzn2.0. [                            ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [#                           ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [##                          ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [###                         ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [####                        ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [######                      ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [#######                     ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [########                    ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [#########                   ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [##########                  ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [###########                 ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [############                ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [##############              ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [###############             ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [################            ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [#################           ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [######################      ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [#######################     ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [########################    ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [##########################  ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0. [########################### ]  6/14\r  Installing : ebtables-2.0.10-16.amzn2.0.1.x86_64                         6/14 \r\n\r  Installing : libselinux-python-2.5-12.am [                            ]  7/14\r  Installing : libselinux-python-2.5-12.am [##                          ]  7/14\r  Installing : libselinux-python-2.5-12.am [#####                       ]  7/14\r  Installing : libselinux-python-2.5-12.am [########                    ]  7/14\r  Installing : libselinux-python-2.5-12.am [###########                 ]  7/14\r  Installing : libselinux-python-2.5-12.am [##############              ]  7/14\r  Installing : libselinux-python-2.5-12.am [#################           ]  7/14\r  Installing : libselinux-python-2.5-12.am [###################         ]  7/14\r  Installing : libselinux-python-2.5-12.am [######################      ]  7/14\r  Installing : libselinux-python-2.5-12.am [########################    ]  7/14\r  Installing : libselinux-python-2.5-12.am [########################### ]  7/14\r  Installing : libselinux-python-2.5-12.amzn2.0.2.x86_64                   7/14 \r\n\r  Installing : python-slip-0.4.0-4.amzn2.n [                            ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [#                           ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [####                        ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [######                      ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [########                    ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [###########                 ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [###################         ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [####################        ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [#####################       ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [######################      ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [#######################     ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [########################    ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [#########################   ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.n [########################### ]  8/14\r  Installing : python-slip-0.4.0-4.amzn2.noarch                            8/14 \r\n\r  Installing : dbus-glib-0.100-7.2.amzn2.x [                            ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [######                      ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [########                    ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [##############              ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [#####################       ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [########################    ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x [########################### ]  9/14\r  Installing : dbus-glib-0.100-7.2.amzn2.x86_64                            9/14 \r\n\r  Installing : dbus-python-1.1.1-9.amzn2.0 [                            ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#                           ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [####                        ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#####                       ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [######                      ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#######                     ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [########                    ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#########                   ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [##########                  ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [###########                 ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#############               ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [###############             ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#################           ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [###################         ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#####################       ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [######################      ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#######################     ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [########################    ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [#########################   ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [##########################  ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0 [########################### ] 10/14\r  Installing : dbus-python-1.1.1-9.amzn2.0.2.x86_64                       10/14 \r\n\r  Installing : python-slip-dbus-0.4.0-4.am [                            ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#                           ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [##                          ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [###                         ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [######                      ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [##########                  ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#############               ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [##############              ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [################            ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#################           ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [##################          ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [###################         ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [####################        ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#####################       ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#######################     ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [########################    ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [#########################   ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.am [########################### ] 11/14\r  Installing : python-slip-dbus-0.4.0-4.amzn2.noarch                      11/14 \r\n\r  Installing : python-firewall-0.4.4.4-6.a [                            ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#                           ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [##                          ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [###                         ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [####                        ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#####                       ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [######                      ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#######                     ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [########                    ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#########                   ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [##########                  ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [###########                 ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [############                ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#############               ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [##############              ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [###############             ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [################            ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#################           ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [##################          ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [###################         ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [####################        ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#####################       ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [######################      ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#######################     ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [########################    ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [#########################   ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [##########################  ] 12/14\r  Installing : python-firewall-0.4.4.4-6.a [########################### ] 12/14\r  Installing : python-firewall-0.4.4.4-6.amzn2.0.1.noarch                 12/14 \r\n\r  Installing : firewalld-filesystem-0.4.4. [                            ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [##                          ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [#####                       ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [#######                     ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [##########                  ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [############                ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [###############             ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [##################          ] 13/14\r  Installing : firewalld-filesystem-0.4.4. [#########################   ] 13/14\r  Installing : firewalld-filesystem-0.4.4.4-6.amzn2.0.1.noarch            13/14 \r\n\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [                            ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#                           ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [##                          ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [###                         ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [####                        ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#####                       ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [######                      ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#######                     ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [########                    ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#########                   ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [##########                  ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [###########                 ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [############                ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#############               ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [##############              ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [###############             ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [################            ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#################           ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [##################          ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [###################         ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [####################        ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#####################       ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [######################      ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#######################     ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [########################    ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [#########################   ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [##########################  ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0 [########################### ] 14/14\r  Installing : firewalld-0.4.4.4-6.amzn2.0.1.noarch                       14/14 \r\n\r  Verifying  : python-slip-dbus-0.4.0-4.amzn2.noarch                       1/14 \r\n\r  Verifying  : firewalld-filesystem-0.4.4.4-6.amzn2.0.1.noarch             2/14 \r\n\r  Verifying  : firewalld-0.4.4.4-6.amzn2.0.1.noarch                        3/14 \r\n\r  Verifying  : dbus-glib-0.100-7.2.amzn2.x86_64                            4/14 \r\n\r  Verifying  : libselinux-python-2.5-12.amzn2.0.2.x86_64                   5/14 \r\n\r  Verifying  : python-decorator-3.4.0-3.amzn2.noarch                       6/14 \r\n\r  Verifying  : python-gobject-base-3.22.0-1.amzn2.1.x86_64                 7/14 \r\n\r  Verifying  : ebtables-2.0.10-16.amzn2.0.1.x86_64                         8/14 \r\n\r  Verifying  : python-slip-0.4.0-4.amzn2.noarch                            9/14 \r\n\r  Verifying  : ipset-libs-6.29-1.amzn2.0.1.x86_64                         10/14 \r\n\r  Verifying  : python-firewall-0.4.4.4-6.amzn2.0.1.noarch                 11/14 \r\n\r  Verifying  : dbus-python-1.1.1-9.amzn2.0.2.x86_64                       12/14 \r\n\r  Verifying  : ipset-6.29-1.amzn2.0.1.x86_64                              13/14 \r\n\r  Verifying  : gobject-introspection-1.56.1-1.amzn2.x86_64                14/14 \r\n\r\nInstalled:\r\n  firewalld.noarch 0:0.4.4.4-6.amzn2.0.1                                        \r\n\r\nDependency Installed:\r\n  dbus-glib.x86_64 0:0.100-7.2.amzn2                                            \r\n  dbus-python.x86_64 0:1.1.1-9.amzn2.0.2                                        \r\n  ebtables.x86_64 0:2.0.10-16.amzn2.0.1                                         \r\n  firewalld-filesystem.noarch 0:0.4.4.4-6.amzn2.0.1                             \r\n  gobject-introspection.x86_64 0:1.56.1-1.amzn2                                 \r\n  ipset.x86_64 0:6.29-1.amzn2.0.1                                               \r\n  ipset-libs.x86_64 0:6.29-1.amzn2.0.1                                          \r\n  libselinux-python.x86_64 0:2.5-12.amzn2.0.2                                   \r\n  python-decorator.noarch 0:3.4.0-3.amzn2                                       \r\n  python-firewall.noarch 0:0.4.4.4-6.amzn2.0.1                                  \r\n  python-gobject-base.x86_64 0:3.22.0-1.amzn2.1                                 \r\n  python-slip.noarch 0:0.4.0-4.amzn2                                            \r\n  python-slip-dbus.noarch 0:0.4.0-4.amzn2                                       \r\n\r\nComplete!\r\n",
+    "stdout_lines": [
+        "Loaded plugins: extras_suggestions, langpacks, priorities, update-motd",
+        "Existing lock /var/run/yum.pid: another copy is running as pid 3267.",
+        "Another app is currently holding the yum lock; waiting for it to exit...",
+        "  The other application is: yum",
+        "    Memory :  89 M RSS (305 MB VSZ)",
+        "    Started: Sat Oct 23 21:48:17 2021 - 00:02 ago",
+        "    State  : Running, pid: 3267",
+        "Another app is currently holding the yum lock; waiting for it to exit...",
+        "  The other application is: yum",
+        "    Memory : 152 M RSS (369 MB VSZ)",
+        "    Started: Sat Oct 23 21:48:17 2021 - 00:04 ago",
+        "    State  : Running, pid: 3267",
+        "Resolving Dependencies",
+        "--> Running transaction check",
+        "---> Package firewalld.noarch 0:0.4.4.4-6.amzn2.0.1 will be installed",
+        "--> Processing Dependency: python-firewall = 0.4.4.4-6.amzn2.0.1 for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch",
+        "--> Processing Dependency: firewalld-filesystem = 0.4.4.4-6.amzn2.0.1 for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch",
+        "--> Processing Dependency: ipset for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch",
+        "--> Processing Dependency: ebtables for package: firewalld-0.4.4.4-6.amzn2.0.1.noarch",
+        "--> Running transaction check",
+        "---> Package ebtables.x86_64 0:2.0.10-16.amzn2.0.1 will be installed",
+        "---> Package firewalld-filesystem.noarch 0:0.4.4.4-6.amzn2.0.1 will be installed",
+        "---> Package ipset.x86_64 0:6.29-1.amzn2.0.1 will be installed",
+        "--> Processing Dependency: ipset-libs(x86-64) = 6.29-1.amzn2.0.1 for package: ipset-6.29-1.amzn2.0.1.x86_64",
+        "--> Processing Dependency: libipset.so.3(LIBIPSET_3.0)(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64",
+        "--> Processing Dependency: libipset.so.3(LIBIPSET_2.0)(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64",
+        "--> Processing Dependency: libipset.so.3(LIBIPSET_1.0)(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64",
+        "--> Processing Dependency: libipset.so.3()(64bit) for package: ipset-6.29-1.amzn2.0.1.x86_64",
+        "---> Package python-firewall.noarch 0:0.4.4.4-6.amzn2.0.1 will be installed",
+        "--> Processing Dependency: python-slip-dbus for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch",
+        "--> Processing Dependency: python-decorator for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch",
+        "--> Processing Dependency: pygobject3-base for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch",
+        "--> Processing Dependency: dbus-python for package: python-firewall-0.4.4.4-6.amzn2.0.1.noarch",
+        "--> Running transaction check",
+        "---> Package dbus-python.x86_64 0:1.1.1-9.amzn2.0.2 will be installed",
+        "--> Processing Dependency: libdbus-glib-1.so.2()(64bit) for package: dbus-python-1.1.1-9.amzn2.0.2.x86_64",
+        "---> Package ipset-libs.x86_64 0:6.29-1.amzn2.0.1 will be installed",
+        "---> Package python-decorator.noarch 0:3.4.0-3.amzn2 will be installed",
+        "---> Package python-gobject-base.x86_64 0:3.22.0-1.amzn2.1 will be installed",
+        "--> Processing Dependency: gobject-introspection(x86-64) >= 1.46.0 for package: python-gobject-base-3.22.0-1.amzn2.1.x86_64",
+        "--> Processing Dependency: libgirepository-1.0.so.1()(64bit) for package: python-gobject-base-3.22.0-1.amzn2.1.x86_64",
+        "---> Package python-slip-dbus.noarch 0:0.4.0-4.amzn2 will be installed",
+        "--> Processing Dependency: python-slip = 0.4.0-4.amzn2 for package: python-slip-dbus-0.4.0-4.amzn2.noarch",
+        "--> Running transaction check",
+        "---> Package dbus-glib.x86_64 0:0.100-7.2.amzn2 will be installed",
+        "---> Package gobject-introspection.x86_64 0:1.56.1-1.amzn2 will be installed",
+        "---> Package python-slip.noarch 0:0.4.0-4.amzn2 will be installed",
+        "--> Processing Dependency: libselinux-python for package: python-slip-0.4.0-4.amzn2.noarch",
+        "--> Running transaction check",
+        "---> Package libselinux-python.x86_64 0:2.5-12.amzn2.0.2 will be installed",
+        "--> Finished Dependency Resolution",
+        "",
+        "Dependencies Resolved",
+        "",
+        "================================================================================",
+        " Package                  Arch      Version                 Repository     Size",
+        "================================================================================",
+        "Installing:",
+        " firewalld                noarch    0.4.4.4-6.amzn2.0.1     amzn2-core    416 k",
+        "Installing for dependencies:",
+        " dbus-glib                x86_64    0.100-7.2.amzn2         amzn2-core    103 k",
+        " dbus-python              x86_64    1.1.1-9.amzn2.0.2       amzn2-core    206 k",
+        " ebtables                 x86_64    2.0.10-16.amzn2.0.1     amzn2-core    122 k",
+        " firewalld-filesystem     noarch    0.4.4.4-6.amzn2.0.1     amzn2-core     47 k",
+        " gobject-introspection    x86_64    1.56.1-1.amzn2          amzn2-core    242 k",
+        " ipset                    x86_64    6.29-1.amzn2.0.1        amzn2-core     41 k",
+        " ipset-libs               x86_64    6.29-1.amzn2.0.1        amzn2-core     54 k",
+        " libselinux-python        x86_64    2.5-12.amzn2.0.2        amzn2-core    237 k",
+        " python-decorator         noarch    3.4.0-3.amzn2           amzn2-core     27 k",
+        " python-firewall          noarch    0.4.4.4-6.amzn2.0.1     amzn2-core    326 k",
+        " python-gobject-base      x86_64    3.22.0-1.amzn2.1        amzn2-core    293 k",
+        " python-slip              noarch    0.4.0-4.amzn2           amzn2-core     31 k",
+        " python-slip-dbus         noarch    0.4.0-4.amzn2           amzn2-core     32 k",
+        "",
+        "Transaction Summary",
+        "================================================================================",
+        "Install  1 Package (+13 Dependent packages)",
+        "",
+        "Total download size: 2.1 M",
+        "Installed size: 7.9 M",
+        "Downloading packages:",
+        "",
+        "(1/14): dbus-glib-0.100-7.2.amzn2.x86_64.rpm               | 103 kB   00:00     ",
+        "",
+        "(2/14): dbus-python-1.1.1-9.amzn2.0.2.x86_64.rpm           | 206 kB   00:00     ",
+        "",
+        "(3/14): ebtables-2.0.10-16.amzn2.0.1.x86_64.rpm            | 122 kB   00:00     ",
+        "",
+        "(4/14): firewalld-filesystem-0.4.4.4-6.amzn2.0.1.noarch.rp |  47 kB   00:00     ",
+        "",
+        "(5/14): gobject-introspection-1.56.1-1.amzn2.x86_64.rpm    | 242 kB   00:00     ",
+        "",
+        "(6/14): firewalld-0.4.4.4-6.amzn2.0.1.noarch.rpm           | 416 kB   00:00     ",
+        "",
+        "(7/14): ipset-6.29-1.amzn2.0.1.x86_64.rpm                  |  41 kB   00:00     ",
+        "",
+        "(8/14): ipset-libs-6.29-1.amzn2.0.1.x86_64.rpm             |  54 kB   00:00     ",
+        "",
+        "(9/14): libselinux-python-2.5-12.amzn2.0.2.x86_64.rpm      | 237 kB   00:00     ",
+        "",
+        "(10/14): python-decorator-3.4.0-3.amzn2.noarch.rpm         |  27 kB   00:00     ",
+        "",
+        "(11/14): python-firewall-0.4.4.4-6.amzn2.0.1.noarch.rpm    | 326 kB   00:00     ",
+        "",
+        "(12/14): python-slip-0.4.0-4.amzn2.noarch.rpm              |  31 kB   00:00     ",
+        "",
+        "(13/14): python-gobject-base-3.22.0-1.amzn2.1.x86_64.rpm   | 293 kB   00:00     ",
+        "",
+        "(14/14): python-slip-dbus-0.4.0-4.amzn2.noarch.rpm         |  32 kB   00:00     ",
+        "--------------------------------------------------------------------------------",
+        "Total                                              7.2 MB/s | 2.1 MB  00:00     ",
+        "Running transaction check",
+        "Running transaction test",
+        "Transaction test succeeded",
+        "Running transaction",
+        "",
+        "  Installing : python-decorator-3.4.0-3.am [                            ]  1/14",
+        "  Installing : python-decorator-3.4.0-3.am [#                           ]  1/14",
+        "  Installing : python-decorator-3.4.0-3.am [#####                       ]  1/14",
+        "  Installing : python-decorator-3.4.0-3.am [#########                   ]  1/14",
+        "  Installing : python-decorator-3.4.0-3.am [############                ]  1/14",
+        "  Installing : python-decorator-3.4.0-3.am [#############               ]  1/14",
+        "  Installing : python-decorator-3.4.0-3.am [########################### ]  1/14",
+        "  Installing : python-decorator-3.4.0-3.amzn2.noarch                       1/14 ",
+        "",
+        "  Installing : gobject-introspection-1.56. [                            ]  2/14",
+        "  Installing : gobject-introspection-1.56. [###                         ]  2/14",
+        "  Installing : gobject-introspection-1.56. [#####                       ]  2/14",
+        "  Installing : gobject-introspection-1.56. [#######                     ]  2/14",
+        "  Installing : gobject-introspection-1.56. [########                    ]  2/14",
+        "  Installing : gobject-introspection-1.56. [###########                 ]  2/14",
+        "  Installing : gobject-introspection-1.56. [#############               ]  2/14",
+        "  Installing : gobject-introspection-1.56. [###############             ]  2/14",
+        "  Installing : gobject-introspection-1.56. [#################           ]  2/14",
+        "  Installing : gobject-introspection-1.56. [###################         ]  2/14",
+        "  Installing : gobject-introspection-1.56. [####################        ]  2/14",
+        "  Installing : gobject-introspection-1.56. [######################      ]  2/14",
+        "  Installing : gobject-introspection-1.56. [#########################   ]  2/14",
+        "  Installing : gobject-introspection-1.56. [########################### ]  2/14",
+        "  Installing : gobject-introspection-1.56.1-1.amzn2.x86_64                 2/14 ",
+        "",
+        "  Installing : python-gobject-base-3.22.0- [                            ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [#                           ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [###                         ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [#####                       ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [######                      ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [########                    ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [#########                   ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [##########                  ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [###########                 ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [############                ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [#############               ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [##############              ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [###############             ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [################            ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [#################           ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [##################          ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [####################        ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [#####################       ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [######################      ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [#######################     ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [########################    ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [#########################   ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [##########################  ]  3/14",
+        "  Installing : python-gobject-base-3.22.0- [########################### ]  3/14",
+        "  Installing : python-gobject-base-3.22.0-1.amzn2.1.x86_64                 3/14 ",
+        "",
+        "  Installing : ipset-libs-6.29-1.amzn2.0.1 [                            ]  4/14",
+        "  Installing : ipset-libs-6.29-1.amzn2.0.1 [######                      ]  4/14",
+        "  Installing : ipset-libs-6.29-1.amzn2.0.1 [#############               ]  4/14",
+        "  Installing : ipset-libs-6.29-1.amzn2.0.1 [####################        ]  4/14",
+        "  Installing : ipset-libs-6.29-1.amzn2.0.1 [##########################  ]  4/14",
+        "  Installing : ipset-libs-6.29-1.amzn2.0.1 [########################### ]  4/14",
+        "  Installing : ipset-libs-6.29-1.amzn2.0.1.x86_64                          4/14 ",
+        "",
+        "  Installing : ipset-6.29-1.amzn2.0.1.x86_ [                            ]  5/14",
+        "  Installing : ipset-6.29-1.amzn2.0.1.x86_ [########                    ]  5/14",
+        "  Installing : ipset-6.29-1.amzn2.0.1.x86_ [###############             ]  5/14",
+        "  Installing : ipset-6.29-1.amzn2.0.1.x86_ [########################    ]  5/14",
+        "  Installing : ipset-6.29-1.amzn2.0.1.x86_ [########################### ]  5/14",
+        "  Installing : ipset-6.29-1.amzn2.0.1.x86_64                               5/14 ",
+        "",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [                            ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [#                           ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [##                          ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [###                         ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [####                        ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [######                      ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [#######                     ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [########                    ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [#########                   ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [##########                  ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [###########                 ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [############                ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [##############              ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [###############             ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [################            ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [#################           ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [######################      ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [#######################     ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [########################    ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [##########################  ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0. [########################### ]  6/14",
+        "  Installing : ebtables-2.0.10-16.amzn2.0.1.x86_64                         6/14 ",
+        "",
+        "  Installing : libselinux-python-2.5-12.am [                            ]  7/14",
+        "  Installing : libselinux-python-2.5-12.am [##                          ]  7/14",
+        "  Installing : libselinux-python-2.5-12.am [#####                       ]  7/14",
+        "  Installing : libselinux-python-2.5-12.am [########                    ]  7/14",
+        "  Installing : libselinux-python-2.5-12.am [###########                 ]  7/14",
+        "  Installing : libselinux-python-2.5-12.am [##############              ]  7/14",
+        "  Installing : libselinux-python-2.5-12.am [#################           ]  7/14",
+        "  Installing : libselinux-python-2.5-12.am [###################         ]  7/14",
+        "  Installing : libselinux-python-2.5-12.am [######################      ]  7/14",
+        "  Installing : libselinux-python-2.5-12.am [########################    ]  7/14",
+        "  Installing : libselinux-python-2.5-12.am [########################### ]  7/14",
+        "  Installing : libselinux-python-2.5-12.amzn2.0.2.x86_64                   7/14 ",
+        "",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [                            ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [#                           ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [####                        ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [######                      ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [########                    ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [###########                 ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [###################         ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [####################        ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [#####################       ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [######################      ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [#######################     ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [########################    ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [#########################   ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.n [########################### ]  8/14",
+        "  Installing : python-slip-0.4.0-4.amzn2.noarch                            8/14 ",
+        "",
+        "  Installing : dbus-glib-0.100-7.2.amzn2.x [                            ]  9/14",
+        "  Installing : dbus-glib-0.100-7.2.amzn2.x [######                      ]  9/14",
+        "  Installing : dbus-glib-0.100-7.2.amzn2.x [########                    ]  9/14",
+        "  Installing : dbus-glib-0.100-7.2.amzn2.x [##############              ]  9/14",
+        "  Installing : dbus-glib-0.100-7.2.amzn2.x [#####################       ]  9/14",
+        "  Installing : dbus-glib-0.100-7.2.amzn2.x [########################    ]  9/14",
+        "  Installing : dbus-glib-0.100-7.2.amzn2.x [########################### ]  9/14",
+        "  Installing : dbus-glib-0.100-7.2.amzn2.x86_64                            9/14 ",
+        "",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [                            ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [#                           ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [####                        ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [#####                       ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [######                      ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [#######                     ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [########                    ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [#########                   ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [##########                  ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [###########                 ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [#############               ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [###############             ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [#################           ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [###################         ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [#####################       ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [######################      ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [#######################     ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [########################    ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [#########################   ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [##########################  ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0 [########################### ] 10/14",
+        "  Installing : dbus-python-1.1.1-9.amzn2.0.2.x86_64                       10/14 ",
+        "",
+        "  Installing : python-slip-dbus-0.4.0-4.am [                            ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [#                           ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [##                          ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [###                         ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [######                      ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [##########                  ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [#############               ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [##############              ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [################            ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [#################           ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [##################          ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [###################         ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [####################        ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [#####################       ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [#######################     ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [########################    ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [#########################   ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.am [########################### ] 11/14",
+        "  Installing : python-slip-dbus-0.4.0-4.amzn2.noarch                      11/14 ",
+        "",
+        "  Installing : python-firewall-0.4.4.4-6.a [                            ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [#                           ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [##                          ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [###                         ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [####                        ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [#####                       ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [######                      ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [#######                     ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [########                    ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [#########                   ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [##########                  ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [###########                 ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [############                ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [#############               ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [##############              ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [###############             ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [################            ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [#################           ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [##################          ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [###################         ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [####################        ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [#####################       ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [######################      ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [#######################     ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [########################    ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [#########################   ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [##########################  ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.a [########################### ] 12/14",
+        "  Installing : python-firewall-0.4.4.4-6.amzn2.0.1.noarch                 12/14 ",
+        "",
+        "  Installing : firewalld-filesystem-0.4.4. [                            ] 13/14",
+        "  Installing : firewalld-filesystem-0.4.4. [##                          ] 13/14",
+        "  Installing : firewalld-filesystem-0.4.4. [#####                       ] 13/14",
+        "  Installing : firewalld-filesystem-0.4.4. [#######                     ] 13/14",
+        "  Installing : firewalld-filesystem-0.4.4. [##########                  ] 13/14",
+        "  Installing : firewalld-filesystem-0.4.4. [############                ] 13/14",
+        "  Installing : firewalld-filesystem-0.4.4. [###############             ] 13/14",
+        "  Installing : firewalld-filesystem-0.4.4. [##################          ] 13/14",
+        "  Installing : firewalld-filesystem-0.4.4. [#########################   ] 13/14",
+        "  Installing : firewalld-filesystem-0.4.4.4-6.amzn2.0.1.noarch            13/14 ",
+        "",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [                            ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [#                           ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [##                          ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [###                         ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [####                        ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [#####                       ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [######                      ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [#######                     ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [########                    ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [#########                   ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [##########                  ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [###########                 ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [############                ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [#############               ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [##############              ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [###############             ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [################            ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [#################           ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [##################          ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [###################         ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [####################        ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [#####################       ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [######################      ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [#######################     ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [########################    ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [#########################   ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [##########################  ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0 [########################### ] 14/14",
+        "  Installing : firewalld-0.4.4.4-6.amzn2.0.1.noarch                       14/14 ",
+        "",
+        "  Verifying  : python-slip-dbus-0.4.0-4.amzn2.noarch                       1/14 ",
+        "",
+        "  Verifying  : firewalld-filesystem-0.4.4.4-6.amzn2.0.1.noarch             2/14 ",
+        "",
+        "  Verifying  : firewalld-0.4.4.4-6.amzn2.0.1.noarch                        3/14 ",
+        "",
+        "  Verifying  : dbus-glib-0.100-7.2.amzn2.x86_64                            4/14 ",
+        "",
+        "  Verifying  : libselinux-python-2.5-12.amzn2.0.2.x86_64                   5/14 ",
+        "",
+        "  Verifying  : python-decorator-3.4.0-3.amzn2.noarch                       6/14 ",
+        "",
+        "  Verifying  : python-gobject-base-3.22.0-1.amzn2.1.x86_64                 7/14 ",
+        "",
+        "  Verifying  : ebtables-2.0.10-16.amzn2.0.1.x86_64                         8/14 ",
+        "",
+        "  Verifying  : python-slip-0.4.0-4.amzn2.noarch                            9/14 ",
+        "",
+        "  Verifying  : ipset-libs-6.29-1.amzn2.0.1.x86_64                         10/14 ",
+        "",
+        "  Verifying  : python-firewall-0.4.4.4-6.amzn2.0.1.noarch                 11/14 ",
+        "",
+        "  Verifying  : dbus-python-1.1.1-9.amzn2.0.2.x86_64                       12/14 ",
+        "",
+        "  Verifying  : ipset-6.29-1.amzn2.0.1.x86_64                              13/14 ",
+        "",
+        "  Verifying  : gobject-introspection-1.56.1-1.amzn2.x86_64                14/14 ",
+        "",
+        "Installed:",
+        "  firewalld.noarch 0:0.4.4.4-6.amzn2.0.1                                        ",
+        "",
+        "Dependency Installed:",
+        "  dbus-glib.x86_64 0:0.100-7.2.amzn2                                            ",
+        "  dbus-python.x86_64 0:1.1.1-9.amzn2.0.2                                        ",
+        "  ebtables.x86_64 0:2.0.10-16.amzn2.0.1                                         ",
+        "  firewalld-filesystem.noarch 0:0.4.4.4-6.amzn2.0.1                             ",
+        "  gobject-introspection.x86_64 0:1.56.1-1.amzn2                                 ",
+        "  ipset.x86_64 0:6.29-1.amzn2.0.1                                               ",
+        "  ipset-libs.x86_64 0:6.29-1.amzn2.0.1                                          ",
+        "  libselinux-python.x86_64 0:2.5-12.amzn2.0.2                                   ",
+        "  python-decorator.noarch 0:3.4.0-3.amzn2                                       ",
+        "  python-firewall.noarch 0:0.4.4.4-6.amzn2.0.1                                  ",
+        "  python-gobject-base.x86_64 0:3.22.0-1.amzn2.1                                 ",
+        "  python-slip.noarch 0:0.4.0-4.amzn2                                            ",
+        "  python-slip-dbus.noarch 0:0.4.0-4.amzn2                                       ",
+        "",
+        "Complete!"
+    ]
+}
+Escalation succeeded
+<52.87.242.93> (0, 'Loaded plugins: extras_suggestions, langpacks, priorities, update-motd\r\nExisting lock /var/run/yum.pid: another copy is running as pid 3435.\r\nAnother app is currently holding the yum lock; waiting for it to exit...\r\n  The other application is: yum\r\n    Memory :  76 M RSS (292 MB VSZ)\r\n    Started: Sat Oct 23 21:48:26 2021 - 00:02 ago\r\n    State  : Running, pid: 3435\r\nAnother app is currently holding the yum lock; waiting for it to exit...\r\n  The other application is: yum\r\n    Memory : 151 M RSS (368 MB VSZ)\r\n    Started: Sat Oct 23 21:48:26 2021 - 00:04 ago\r\n    State  : Running, pid: 3435\r\nPackage ipset-6.29-1.amzn2.0.1.x86_64 already installed and latest version\r\nNothing to do\r\n', 'Shared connection to 52.87.242.93 closed.\r\n')
+changed: [52.87.242.93] => (item=ipset) => {
+    "ansible_loop_var": "item",
+    "changed": true,
+    "item": "ipset",
+    "rc": 0,
+    "stderr": "Shared connection to 52.87.242.93 closed.\r\n",
+    "stderr_lines": [
+        "Shared connection to 52.87.242.93 closed."
+    ],
+    "stdout": "Loaded plugins: extras_suggestions, langpacks, priorities, update-motd\r\nExisting lock /var/run/yum.pid: another copy is running as pid 3435.\r\nAnother app is currently holding the yum lock; waiting for it to exit...\r\n  The other application is: yum\r\n    Memory :  76 M RSS (292 MB VSZ)\r\n    Started: Sat Oct 23 21:48:26 2021 - 00:02 ago\r\n    State  : Running, pid: 3435\r\nAnother app is currently holding the yum lock; waiting for it to exit...\r\n  The other application is: yum\r\n    Memory : 151 M RSS (368 MB VSZ)\r\n    Started: Sat Oct 23 21:48:26 2021 - 00:04 ago\r\n    State  : Running, pid: 3435\r\nPackage ipset-6.29-1.amzn2.0.1.x86_64 already installed and latest version\r\nNothing to do\r\n",
+    "stdout_lines": [
+        "Loaded plugins: extras_suggestions, langpacks, priorities, update-motd",
+        "Existing lock /var/run/yum.pid: another copy is running as pid 3435.",
+        "Another app is currently holding the yum lock; waiting for it to exit...",
+        "  The other application is: yum",
+        "    Memory :  76 M RSS (292 MB VSZ)",
+        "    Started: Sat Oct 23 21:48:26 2021 - 00:02 ago",
+        "    State  : Running, pid: 3435",
+        "Another app is currently holding the yum lock; waiting for it to exit...",
+        "  The other application is: yum",
+        "    Memory : 151 M RSS (368 MB VSZ)",
+        "    Started: Sat Oct 23 21:48:26 2021 - 00:04 ago",
+        "    State  : Running, pid: 3435",
+        "Package ipset-6.29-1.amzn2.0.1.x86_64 already installed and latest version",
+        "Nothing to do"
+    ]
+}
+
+TASK [fromgit : Copy page from GitHub] ********************************************************************
+task path: /root/ansible_test/roles/fromgit/tasks/main.yml:15
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 52.87.242.93 '/bin/sh -c '"'"'echo ~ec2-user && sleep 0'"'"''
+<52.87.242.93> (0, '/home/ec2-user\n', '')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 52.87.242.93 '/bin/sh -c '"'"'( umask 77 && mkdir -p "` echo /home/ec2-user/.ansible/tmp `"&& mkdir "` echo /home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350 `" && echo ansible-tmp-1635025712.67-10207-80406433863350="` echo /home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350 `" ) && sleep 0'"'"''
+<52.87.242.93> (0, 'ansible-tmp-1635025712.67-10207-80406433863350=/home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350\n', '')
+Using module file /usr/lib/python2.7/site-packages/ansible/modules/net_tools/basics/get_url.py
+<52.87.242.93> PUT /root/.ansible/tmp/ansible-local-95886jMdif/tmpADhhjs TO /home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350/AnsiballZ_get_url.py
+<52.87.242.93> SSH: EXEC sftp -b - -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 '[52.87.242.93]'
+<52.87.242.93> (0, 'sftp> put /root/.ansible/tmp/ansible-local-95886jMdif/tmpADhhjs /home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350/AnsiballZ_get_url.py\n', '')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 52.87.242.93 '/bin/sh -c '"'"'chmod u+x /home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350/ /home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350/AnsiballZ_get_url.py && sleep 0'"'"''
+<52.87.242.93> (0, '', '')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 -tt 52.87.242.93 '/bin/sh -c '"'"'sudo -H -S -n  -u root /bin/sh -c '"'"'"'"'"'"'"'"'echo BECOME-SUCCESS-fisczwizjbltecukiaxonyqkpffdxeoo ; /usr/bin/python3 /home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350/AnsiballZ_get_url.py'"'"'"'"'"'"'"'"' && sleep 0'"'"''
+Escalation succeeded
+<52.87.242.93> (0, '\r\n{"msg": "OK (12281 bytes)", "status_code": 200, "changed": true, "checksum_dest": null, "checksum_src": "03e3e04261d223cec978a681efc2fcc820c65b10", "dest": "/var/www/html/index.html", "elapsed": 0, "url": "https://raw.githubusercontent.com/DomenZero/autorist/master/public_html/index.html", "src": "/home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350/tmpam9v09k0", "md5sum": "ab7914027346503784af7911873e51c1", "uid": 0, "gid": 0, "owner": "root", "group": "root", "mode": "0644", "state": "file", "size": 12281, "invocation": {"module_args": {"url": "https://raw.githubusercontent.com/DomenZero/autorist/master/public_html/index.html", "dest": "/var/www/html/index.html", "force": false, "http_agent": "ansible-httpget", "use_proxy": true, "validate_certs": true, "force_basic_auth": false, "sha256sum": "", "checksum": "", "timeout": 10, "follow": false, "unsafe_writes": false, "url_username": null, "url_password": null, "client_cert": null, "client_key": null, "backup": null, "headers": null, "tmp_dest": null, "mode": null, "owner": null, "group": null, "seuser": null, "serole": null, "selevel": null, "setype": null, "attributes": null, "src": null, "content": null, "remote_src": null, "regexp": null, "delimiter": null, "directory_mode": null, "path": "/var/www/html/index.html"}}}\r\n', 'Shared connection to 52.87.242.93 closed.\r\n')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 52.87.242.93 '/bin/sh -c '"'"'rm -f -r /home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350/ > /dev/null 2>&1 && sleep 0'"'"''
+<52.87.242.93> (0, '', '')
+changed: [52.87.242.93] => {
+    "changed": true,
+    "checksum_dest": null,
+    "checksum_src": "03e3e04261d223cec978a681efc2fcc820c65b10",
+    "dest": "/var/www/html/index.html",
+    "elapsed": 0,
+    "gid": 0,
+    "group": "root",
+    "invocation": {
+        "module_args": {
+            "attributes": null,
+            "backup": null,
+            "checksum": "",
+            "client_cert": null,
+            "client_key": null,
+            "content": null,
+            "delimiter": null,
+            "dest": "/var/www/html/index.html",
+            "directory_mode": null,
+            "follow": false,
+            "force": false,
+            "force_basic_auth": false,
+            "group": null,
+            "headers": null,
+            "http_agent": "ansible-httpget",
+            "mode": null,
+            "owner": null,
+            "path": "/var/www/html/index.html",
+            "regexp": null,
+            "remote_src": null,
+            "selevel": null,
+            "serole": null,
+            "setype": null,
+            "seuser": null,
+            "sha256sum": "",
+            "src": null,
+            "timeout": 10,
+            "tmp_dest": null,
+            "unsafe_writes": false,
+            "url": "https://raw.githubusercontent.com/DomenZero/autorist/master/public_html/index.html",
+            "url_password": null,
+            "url_username": null,
+            "use_proxy": true,
+            "validate_certs": true
+        }
+    },
+    "md5sum": "ab7914027346503784af7911873e51c1",
+    "mode": "0644",
+    "msg": "OK (12281 bytes)",
+    "owner": "root",
+    "size": 12281,
+    "src": "/home/ec2-user/.ansible/tmp/ansible-tmp-1635025712.67-10207-80406433863350/tmpam9v09k0",
+    "state": "file",
+    "status_code": 200,
+    "uid": 0,
+    "url": "https://raw.githubusercontent.com/DomenZero/autorist/master/public_html/index.html"
+}
+
+TASK [fromgit : Start httpd services] *********************************************************************
+task path: /root/ansible_test/roles/fromgit/tasks/main.yml:20
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 52.87.242.93 '/bin/sh -c '"'"'echo ~ec2-user && sleep 0'"'"''
+<52.87.242.93> (0, '/home/ec2-user\n', '')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 52.87.242.93 '/bin/sh -c '"'"'( umask 77 && mkdir -p "` echo /home/ec2-user/.ansible/tmp `"&& mkdir "` echo /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251 `" && echo ansible-tmp-1635025716.62-10240-242640190354251="` echo /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251 `" ) && sleep 0'"'"''
+<52.87.242.93> (0, 'ansible-tmp-1635025716.62-10240-242640190354251=/home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251\n', '')
+Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/setup.py
+<52.87.242.93> PUT /root/.ansible/tmp/ansible-local-95886jMdif/tmpwPBmOH TO /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/AnsiballZ_setup.py
+<52.87.242.93> SSH: EXEC sftp -b - -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 '[52.87.242.93]'
+<52.87.242.93> (0, 'sftp> put /root/.ansible/tmp/ansible-local-95886jMdif/tmpwPBmOH /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/AnsiballZ_setup.py\n', '')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 52.87.242.93 '/bin/sh -c '"'"'chmod u+x /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/ /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/AnsiballZ_setup.py && sleep 0'"'"''
+<52.87.242.93> (0, '', '')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 -tt 52.87.242.93 '/bin/sh -c '"'"'sudo -H -S -n  -u root /bin/sh -c '"'"'"'"'"'"'"'"'echo BECOME-SUCCESS-divohgriufqxpopeolxtsofkaysofpev ; /usr/bin/python3 /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/AnsiballZ_setup.py'"'"'"'"'"'"'"'"' && sleep 0'"'"''
+Escalation succeeded
+<52.87.242.93> (0, '\r\n{"ansible_facts": {"ansible_service_mgr": "systemd"}, "invocation": {"module_args": {"filter": "ansible_service_mgr", "gather_subset": ["!all"], "gather_timeout": 10, "fact_path": "/etc/ansible/facts.d"}}}\r\n', 'Shared connection to 52.87.242.93 closed.\r\n')
+Using module file /usr/lib/python2.7/site-packages/ansible/modules/system/systemd.py
+<52.87.242.93> PUT /root/.ansible/tmp/ansible-local-95886jMdif/tmpDZIBPj TO /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/AnsiballZ_systemd.py
+<52.87.242.93> SSH: EXEC sftp -b - -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 '[52.87.242.93]'
+<52.87.242.93> (0, 'sftp> put /root/.ansible/tmp/ansible-local-95886jMdif/tmpDZIBPj /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/AnsiballZ_systemd.py\n', '')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 52.87.242.93 '/bin/sh -c '"'"'chmod u+x /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/ /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/AnsiballZ_systemd.py && sleep 0'"'"''
+<52.87.242.93> (0, '', '')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 -tt 52.87.242.93 '/bin/sh -c '"'"'sudo -H -S -n  -u root /bin/sh -c '"'"'"'"'"'"'"'"'echo BECOME-SUCCESS-ktqtiduhzetqajxekucyabnwxkiyfcsm ; /usr/bin/python3 /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/AnsiballZ_systemd.py'"'"'"'"'"'"'"'"' && sleep 0'"'"''
+Escalation succeeded
+<52.87.242.93> (0, '\r\n{"name": "httpd", "changed": false, "status": {"Type": "notify", "Restart": "no", "NotifyAccess": "main", "RestartUSec": "100ms", "TimeoutStartUSec": "1min 30s", "TimeoutStopUSec": "1min 30s", "WatchdogUSec": "0", "WatchdogTimestamp": "Sat 2021-10-23 21:48:18 UTC", "WatchdogTimestampMonotonic": "25590783", "StartLimitInterval": "10000000", "StartLimitBurst": "5", "StartLimitAction": "none", "FailureAction": "none", "PermissionsStartOnly": "no", "RootDirectoryStartOnly": "no", "RemainAfterExit": "no", "GuessMainPID": "yes", "MainPID": "3288", "ControlPID": "0", "FileDescriptorStoreMax": "0", "StatusText": "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec", "StatusErrno": "0", "Result": "success", "ExecMainStartTimestamp": "Sat 2021-10-23 21:48:18 UTC", "ExecMainStartTimestampMonotonic": "25422925", "ExecMainExitTimestampMonotonic": "0", "ExecMainPID": "3288", "ExecMainCode": "0", "ExecMainStatus": "0", "ExecStart": "{ path=/usr/sbin/httpd ; argv[]=/usr/sbin/httpd $OPTIONS -DFOREGROUND ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", "ExecReload": "{ path=/usr/sbin/httpd ; argv[]=/usr/sbin/httpd $OPTIONS -k graceful ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }", "Slice": "system.slice", "ControlGroup": "/system.slice/httpd.service", "MemoryCurrent": "18446744073709551615", "TasksCurrent": "18446744073709551615", "Delegate": "no", "CPUAccounting": "no", "CPUShares": "18446744073709551615", "StartupCPUShares": "18446744073709551615", "CPUQuotaPerSecUSec": "infinity", "BlockIOAccounting": "no", "BlockIOWeight": "18446744073709551615", "StartupBlockIOWeight": "18446744073709551615", "MemoryAccounting": "no", "MemoryLimit": "18446744073709551615", "DevicePolicy": "auto", "TasksAccounting": "no", "TasksMax": "18446744073709551615", "Environment": "LANG=C", "UMask": "0022", "LimitCPU": "18446744073709551615", "LimitFSIZE": "18446744073709551615", "LimitDATA": "18446744073709551615", "LimitSTACK": "10485760", "LimitCORE": "18446744073709551615", "LimitRSS": "18446744073709551615", "LimitNOFILE": "65535", "LimitAS": "18446744073709551615", "LimitNPROC": "18446744073709551615", "LimitMEMLOCK": "18446744073709551615", "LimitLOCKS": "18446744073709551615", "LimitSIGPENDING": "30446", "LimitMSGQUEUE": "819200", "LimitNICE": "0", "LimitRTPRIO": "0", "LimitRTTIME": "18446744073709551615", "OOMScoreAdjust": "0", "Nice": "0", "IOScheduling": "0", "CPUSchedulingPolicy": "0", "CPUSchedulingPriority": "0", "TimerSlackNSec": "50000", "CPUSchedulingResetOnFork": "no", "NonBlocking": "no", "StandardInput": "null", "StandardOutput": "journal", "StandardError": "inherit", "TTYReset": "no", "TTYVHangup": "no", "TTYVTDisallocate": "no", "SyslogPriority": "30", "SyslogLevelPrefix": "yes", "SecureBits": "0", "CapabilityBoundingSet": "18446744073709551615", "AmbientCapabilities": "0", "MountFlags": "0", "PrivateTmp": "yes", "PrivateNetwork": "no", "PrivateDevices": "no", "ProtectHome": "no", "ProtectSystem": "no", "SameProcessGroup": "no", "IgnoreSIGPIPE": "yes", "NoNewPrivileges": "no", "SystemCallErrorNumber": "0", "RuntimeDirectoryMode": "0755", "KillMode": "mixed", "KillSignal": "28", "SendSIGKILL": "yes", "SendSIGHUP": "no", "Id": "httpd.service", "Names": "httpd.service", "Requires": "basic.target system.slice -.mount", "Wants": "httpd-init.service", "Conflicts": "shutdown.target", "Before": "shutdown.target", "After": "basic.target remote-fs.target tmp.mount nss-lookup.target -.mount network.target httpd-init.service system.slice systemd-journald.socket", "RequiresMountsFor": "/var/tmp", "Documentation": "man:httpd.service(8)", "Description": "The Apache HTTP Server", "LoadState": "loaded", "ActiveState": "active", "SubState": "running", "FragmentPath": "/usr/lib/systemd/system/httpd.service", "UnitFileState": "disabled", "UnitFilePreset": "disabled", "InactiveExitTimestamp": "Sat 2021-10-23 21:48:18 UTC", "InactiveExitTimestampMonotonic": "25422953", "ActiveEnterTimestamp": "Sat 2021-10-23 21:48:18 UTC", "ActiveEnterTimestampMonotonic": "25590836", "ActiveExitTimestampMonotonic": "0", "InactiveEnterTimestampMonotonic": "0", "CanStart": "yes", "CanStop": "yes", "CanReload": "yes", "CanIsolate": "no", "StopWhenUnneeded": "no", "RefuseManualStart": "no", "RefuseManualStop": "no", "AllowIsolate": "no", "DefaultDependencies": "yes", "OnFailureJobMode": "replace", "IgnoreOnIsolate": "no", "IgnoreOnSnapshot": "no", "NeedDaemonReload": "no", "JobTimeoutUSec": "0", "JobTimeoutAction": "none", "ConditionResult": "yes", "AssertResult": "yes", "ConditionTimestamp": "Sat 2021-10-23 21:48:18 UTC", "ConditionTimestampMonotonic": "25422338", "AssertTimestamp": "Sat 2021-10-23 21:48:18 UTC", "AssertTimestampMonotonic": "25422340", "Transient": "no", "CollectMode": "inactive"}, "state": "started", "invocation": {"module_args": {"name": "httpd", "state": "started", "daemon_reload": false, "daemon_reexec": false, "no_block": false, "enabled": null, "force": null, "masked": null, "user": null, "scope": null}}}\r\n', 'Shared connection to 52.87.242.93 closed.\r\n')
+<52.87.242.93> ESTABLISH SSH CONNECTION FOR USER: ec2-user
+<52.87.242.93> SSH: EXEC ssh -C -o ControlMaster=auto -o ControlPersist=60s -o StrictHostKeyChecking=no -o 'IdentityFile="./ansible_key.pem"' -o KbdInteractiveAuthentication=no -o PreferredAuthentications=gssapi-with-mic,gssapi-keyex,hostbased,publickey -o PasswordAuthentication=no -o 'User="ec2-user"' -o ConnectTimeout=10 -o ControlPath=/root/.ansible/cp/485e22e854 52.87.242.93 '/bin/sh -c '"'"'rm -f -r /home/ec2-user/.ansible/tmp/ansible-tmp-1635025716.62-10240-242640190354251/ > /dev/null 2>&1 && sleep 0'"'"''
+<52.87.242.93> (0, '', '')
+ok: [52.87.242.93] => {
+    "changed": false,
+    "invocation": {
+        "module_args": {
+            "daemon_reexec": false,
+            "daemon_reload": false,
+            "enabled": null,
+            "force": null,
+            "masked": null,
+            "name": "httpd",
+            "no_block": false,
+            "scope": null,
+            "state": "started",
+            "user": null
+        }
+    },
+    "name": "httpd",
+    "state": "started",
+    "status": {
+        "ActiveEnterTimestamp": "Sat 2021-10-23 21:48:18 UTC",
+        "ActiveEnterTimestampMonotonic": "25590836",
+        "ActiveExitTimestampMonotonic": "0",
+        "ActiveState": "active",
+        "After": "basic.target remote-fs.target tmp.mount nss-lookup.target -.mount network.target httpd-init.service system.slice systemd-journald.socket",
+        "AllowIsolate": "no",
+        "AmbientCapabilities": "0",
+        "AssertResult": "yes",
+        "AssertTimestamp": "Sat 2021-10-23 21:48:18 UTC",
+        "AssertTimestampMonotonic": "25422340",
+        "Before": "shutdown.target",
+        "BlockIOAccounting": "no",
+        "BlockIOWeight": "18446744073709551615",
+        "CPUAccounting": "no",
+        "CPUQuotaPerSecUSec": "infinity",
+        "CPUSchedulingPolicy": "0",
+        "CPUSchedulingPriority": "0",
+        "CPUSchedulingResetOnFork": "no",
+        "CPUShares": "18446744073709551615",
+        "CanIsolate": "no",
+        "CanReload": "yes",
+        "CanStart": "yes",
+        "CanStop": "yes",
+        "CapabilityBoundingSet": "18446744073709551615",
+        "CollectMode": "inactive",
+        "ConditionResult": "yes",
+        "ConditionTimestamp": "Sat 2021-10-23 21:48:18 UTC",
+        "ConditionTimestampMonotonic": "25422338",
+        "Conflicts": "shutdown.target",
+        "ControlGroup": "/system.slice/httpd.service",
+        "ControlPID": "0",
+        "DefaultDependencies": "yes",
+        "Delegate": "no",
+        "Description": "The Apache HTTP Server",
+        "DevicePolicy": "auto",
+        "Documentation": "man:httpd.service(8)",
+        "Environment": "LANG=C",
+        "ExecMainCode": "0",
+        "ExecMainExitTimestampMonotonic": "0",
+        "ExecMainPID": "3288",
+        "ExecMainStartTimestamp": "Sat 2021-10-23 21:48:18 UTC",
+        "ExecMainStartTimestampMonotonic": "25422925",
+        "ExecMainStatus": "0",
+        "ExecReload": "{ path=/usr/sbin/httpd ; argv[]=/usr/sbin/httpd $OPTIONS -k graceful ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "ExecStart": "{ path=/usr/sbin/httpd ; argv[]=/usr/sbin/httpd $OPTIONS -DFOREGROUND ; ignore_errors=no ; start_time=[n/a] ; stop_time=[n/a] ; pid=0 ; code=(null) ; status=0/0 }",
+        "FailureAction": "none",
+        "FileDescriptorStoreMax": "0",
+        "FragmentPath": "/usr/lib/systemd/system/httpd.service",
+        "GuessMainPID": "yes",
+        "IOScheduling": "0",
+        "Id": "httpd.service",
+        "IgnoreOnIsolate": "no",
+        "IgnoreOnSnapshot": "no",
+        "IgnoreSIGPIPE": "yes",
+        "InactiveEnterTimestampMonotonic": "0",
+        "InactiveExitTimestamp": "Sat 2021-10-23 21:48:18 UTC",
+        "InactiveExitTimestampMonotonic": "25422953",
+        "JobTimeoutAction": "none",
+        "JobTimeoutUSec": "0",
+        "KillMode": "mixed",
+        "KillSignal": "28",
+        "LimitAS": "18446744073709551615",
+        "LimitCORE": "18446744073709551615",
+        "LimitCPU": "18446744073709551615",
+        "LimitDATA": "18446744073709551615",
+        "LimitFSIZE": "18446744073709551615",
+        "LimitLOCKS": "18446744073709551615",
+        "LimitMEMLOCK": "18446744073709551615",
+        "LimitMSGQUEUE": "819200",
+        "LimitNICE": "0",
+        "LimitNOFILE": "65535",
+        "LimitNPROC": "18446744073709551615",
+        "LimitRSS": "18446744073709551615",
+        "LimitRTPRIO": "0",
+        "LimitRTTIME": "18446744073709551615",
+        "LimitSIGPENDING": "30446",
+        "LimitSTACK": "10485760",
+        "LoadState": "loaded",
+        "MainPID": "3288",
+        "MemoryAccounting": "no",
+        "MemoryCurrent": "18446744073709551615",
+        "MemoryLimit": "18446744073709551615",
+        "MountFlags": "0",
+        "Names": "httpd.service",
+        "NeedDaemonReload": "no",
+        "Nice": "0",
+        "NoNewPrivileges": "no",
+        "NonBlocking": "no",
+        "NotifyAccess": "main",
+        "OOMScoreAdjust": "0",
+        "OnFailureJobMode": "replace",
+        "PermissionsStartOnly": "no",
+        "PrivateDevices": "no",
+        "PrivateNetwork": "no",
+        "PrivateTmp": "yes",
+        "ProtectHome": "no",
+        "ProtectSystem": "no",
+        "RefuseManualStart": "no",
+        "RefuseManualStop": "no",
+        "RemainAfterExit": "no",
+        "Requires": "basic.target system.slice -.mount",
+        "RequiresMountsFor": "/var/tmp",
+        "Restart": "no",
+        "RestartUSec": "100ms",
+        "Result": "success",
+        "RootDirectoryStartOnly": "no",
+        "RuntimeDirectoryMode": "0755",
+        "SameProcessGroup": "no",
+        "SecureBits": "0",
+        "SendSIGHUP": "no",
+        "SendSIGKILL": "yes",
+        "Slice": "system.slice",
+        "StandardError": "inherit",
+        "StandardInput": "null",
+        "StandardOutput": "journal",
+        "StartLimitAction": "none",
+        "StartLimitBurst": "5",
+        "StartLimitInterval": "10000000",
+        "StartupBlockIOWeight": "18446744073709551615",
+        "StartupCPUShares": "18446744073709551615",
+        "StatusErrno": "0",
+        "StatusText": "Total requests: 0; Idle/Busy workers 100/0;Requests/sec: 0; Bytes served/sec:   0 B/sec",
+        "StopWhenUnneeded": "no",
+        "SubState": "running",
+        "SyslogLevelPrefix": "yes",
+        "SyslogPriority": "30",
+        "SystemCallErrorNumber": "0",
+        "TTYReset": "no",
+        "TTYVHangup": "no",
+        "TTYVTDisallocate": "no",
+        "TasksAccounting": "no",
+        "TasksCurrent": "18446744073709551615",
+        "TasksMax": "18446744073709551615",
+        "TimeoutStartUSec": "1min 30s",
+        "TimeoutStopUSec": "1min 30s",
+        "TimerSlackNSec": "50000",
+        "Transient": "no",
+        "Type": "notify",
+        "UMask": "0022",
+        "UnitFilePreset": "disabled",
+        "UnitFileState": "disabled",
+        "Wants": "httpd-init.service",
+        "WatchdogTimestamp": "Sat 2021-10-23 21:48:18 UTC",
+        "WatchdogTimestampMonotonic": "25590783",
+        "WatchdogUSec": "0"
+    }
+}
+META: ran handlers
+META: ran handlers
+
+PLAY RECAP ************************************************************************************************
+52.87.242.93               : ok=5    changed=4    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+localhost                  : ok=5    changed=2    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+

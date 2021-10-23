@@ -1,0 +1,16 @@
+---
+- name: Prepare
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Make sure python3 is installed
+      package:
+        name: python
+        state: present
+      become: true
+    
+    - name: Make sure apache is installed
+      package:
+        name: httpd
+        state: present
+      become: true

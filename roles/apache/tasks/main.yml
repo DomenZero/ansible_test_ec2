@@ -1,0 +1,21 @@
+---
+- name: Install Apache
+  raw: yum -y install httpd
+
+- name: Start Apache service
+  raw: systemctl start httpd
+
+- name: Install firewalld
+  raw: yum -y install {{ item }}
+  with_items:
+    - firewalld
+    - ipset
+
+- name: Copy myWebPage to ApacheServer
+  ansible.builtin.template:
+    src: "{{ source_file }}"
+    dest: "{{ dest_file }}"
+    owner: bin
+    group: wheel
+    mode: '0644'
+  notify: restart apache

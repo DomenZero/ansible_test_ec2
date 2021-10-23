@@ -1,0 +1,20 @@
+---
+- name: Create AWS EC2 Instance for service
+  hosts: local
+  connection: local
+  gather_facts: false
+
+  roles:
+   - role: aws_create
+     tags: aws
+
+- name: AWS Server
+  hosts: awsserver
+  remote_user: ec2-user
+  become: true
+  gather_facts: false
+  roles:
+   - role: apache
+     tags: apache
+   - role: fromgit
+     tags: fromgit

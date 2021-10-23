@@ -1,0 +1,175 @@
+
+[root@localhost service_tests-role]# python3 -m molecule create
+INFO     default scenario test matrix: dependency, create, prepare
+INFO     Performing prerun...
+INFO     Added ANSIBLE_LIBRARY=/root/.cache/ansible-compat/4c1a25/modules:/root/.ansible/plugins/modules:/usr/share/ansible/plugins/modules
+INFO     Added ANSIBLE_COLLECTIONS_PATHS=/root/.cache/ansible-compat/4c1a25/collections:/root/.ansible/collections:/usr/share/ansible/collections
+INFO     Added ANSIBLE_ROLES_PATH=/root/.cache/ansible-compat/4c1a25/roles:/root/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
+INFO     Using /root/.ansible/roles/blabla.user symlink to current repository in order to enable Ansible to find the role using its expected full name.
+INFO     Inventory /root/ansible_test/service_tests-role/molecule/default/../../../group_vars linked to /root/.cache/molecule/service_tests-role/default/inventory/group_vars
+INFO     Running default > dependency
+WARNING  Skipping, missing the requirements file.
+WARNING  Skipping, missing the requirements file.
+INFO     Inventory /root/ansible_test/service_tests-role/molecule/default/../../../group_vars linked to /root/.cache/molecule/service_tests-role/default/inventory/group_vars
+INFO     Running default > create
+
+PLAY [Create] *********************************************************************************************
+
+TASK [Create security groups] *****************************************************************************
+ok: [local]
+
+TASK [Test for presence of local key pair] ****************************************************************
+ok: [local]
+
+TASK [Delete remote key pair] *****************************************************************************
+changed: [local]
+
+TASK [Create key pair] ************************************************************************************
+changed: [local]
+
+TASK [Persist the key pair] *******************************************************************************
+changed: [local]
+
+TASK [Get the ec2 ami(s) by owner and name, if image not set] *********************************************
+ok: [local] => (item={u'image_owner': 262975736555, u'instance_type': u't2.micro', u'image_name': u'ami-0e52d91bd15963d8f', u'name': u'local', u'tags': [{u'Name': u'service_tests-role'}]})
+
+TASK [Make test molecule instance] ************************************************************************
+changed: [local] => (item={u'image_owner': 262975736555, u'instance_type': u't2.micro', u'image_name': u'ami-0e52d91bd15963d8f', u'name': u'local', u'tags': [{u'Name': u'service_tests-role'}]})
+
+TASK [Wait for instance(s) creation to complete] **********************************************************
+FAILED - RETRYING: Wait for instance(s) creation to complete (300 retries left).
+FAILED - RETRYING: Wait for instance(s) creation to complete (299 retries left).
+FAILED - RETRYING: Wait for instance(s) creation to complete (298 retries left).
+FAILED - RETRYING: Wait for instance(s) creation to complete (297 retries left).
+FAILED - RETRYING: Wait for instance(s) creation to complete (296 retries left).
+FAILED - RETRYING: Wait for instance(s) creation to complete (295 retries left).
+FAILED - RETRYING: Wait for instance(s) creation to complete (294 retries left).
+FAILED - RETRYING: Wait for instance(s) creation to complete (293 retries left).
+FAILED - RETRYING: Wait for instance(s) creation to complete (292 retries left).
+FAILED - RETRYING: Wait for instance(s) creation to complete (291 retries left).
+FAILED - RETRYING: Wait for instance(s) creation to complete (290 retries left).
+changed: [local] => (item={u'ansible_loop_var': u'item', u'ansible_job_id': u'476249224528.2559', u'failed': False, u'started': 1, u'changed': True, u'item': {u'image_owner': 262975736555, u'instance_type': u't2.micro', u'tags': [{u'Name': u'service_tests-role'}], u'image_name': u'ami-0e52d91bd15963d8f', u'name': u'local'}, u'finished': 0, u'results_file': u'/root/.ansible_async/476249224528.2559'})
+
+TASK [Populate instance config dict] **********************************************************************
+ok: [local] => (item={u'ansible_loop_var': u'item', u'ansible_job_id': u'476249224528.2559', u'instances': [{u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-82-161.ec2.internal', u'block_device_mapping': {u'/dev/xvda': {u'status': u'attached', u'delete_on_termination': True, u'volume_id': u'vol-0b690f5c83990bcd4'}}, u'key_name': u'molecule_key', u'public_ip': u'3.87.71.90', u'image_id': u'ami-0e52d91bd15963d8f', u'tenancy': u'default', u'private_ip': u'172.31.82.161', u'groups': {u'sg-0bafe51e5da120895': u'molecule'}, u'public_dns_name': u'ec2-3-87-71-90.compute-1.amazonaws.com', u'state_code': 16, u'id': u'i-03286c62e28ccec11', u'tags': {u'instance': u'local'}, u'placement': u'us-east-1c', u'ami_launch_index': u'0', u'dns_name': u'ec2-3-87-71-90.compute-1.amazonaws.com', u'region': u'us-east-1', u'ebs_optimized': False, u'launch_time': u'2021-10-23T21:30:11.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/xvda', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'}], u'changed': True, u'attempts': 12, u'instance_ids': [u'i-03286c62e28ccec11'], u'failed': False, u'finished': 1, u'tagged_instances': [{u'ramdisk': None, u'kernel': None, u'root_device_type': u'ebs', u'private_dns_name': u'ip-172-31-82-161.ec2.internal', u'block_device_mapping': {u'/dev/xvda': {u'status': u'attached', u'delete_on_termination': True, u'volume_id': u'vol-0b690f5c83990bcd4'}}, u'key_name': u'molecule_key', u'public_ip': u'3.87.71.90', u'image_id': u'ami-0e52d91bd15963d8f', u'tenancy': u'default', u'private_ip': u'172.31.82.161', u'groups': {u'sg-0bafe51e5da120895': u'molecule'}, u'public_dns_name': u'ec2-3-87-71-90.compute-1.amazonaws.com', u'state_code': 16, u'id': u'i-03286c62e28ccec11', u'tags': {u'instance': u'local'}, u'placement': u'us-east-1c', u'ami_launch_index': u'0', u'dns_name': u'ec2-3-87-71-90.compute-1.amazonaws.com', u'region': u'us-east-1', u'ebs_optimized': False, u'launch_time': u'2021-10-23T21:30:11.000Z', u'instance_type': u't2.micro', u'state': u'running', u'root_device_name': u'/dev/xvda', u'hypervisor': u'xen', u'virtualization_type': u'hvm', u'architecture': u'x86_64'}], u'item': {u'ansible_loop_var': u'item', u'ansible_job_id': u'476249224528.2559', u'failed': False, u'started': 1, u'changed': True, u'item': {u'image_owner': 262975736555, u'instance_type': u't2.micro', u'image_name': u'ami-0e52d91bd15963d8f', u'name': u'local', u'tags': [{u'Name': u'service_tests-role'}]}, u'finished': 0, u'results_file': u'/root/.ansible_async/476249224528.2559'}, u'invocation': {u'module_args': {u'kernel': None, u'image': u'ami-0e52d91bd15963d8f', u'debug_botocore_endpoint_logs': False, u'group': [u'molecule'], u'termination_protection': None, u'private_ip': None, u'spot_type': u'one-time', u'ec2_url': None, u'id': None, u'source_dest_check': None, u'aws_secret_key': None, u'spot_wait_timeout': 600, u'spot_price': None, u'zone': None, u'exact_count': 1, u'ebs_optimized': False, u'state': u'present', u'placement_group': None, u'spot_launch_group': None, u'key_name': u'molecule_key', u'ramdisk': None, u'count_tag': {u'instance': u'local'}, u'vpc_subnet_id': None, u'instance_ids': None, u'user_data': None, u'wait_timeout': 300, u'profile': None, u'assign_public_ip': None, u'monitoring': False, u'wait': True, u'count': 1, u'aws_access_key': None, u'security_token': None, u'instance_profile_name': None, u'region': u'us-east-1', u'network_interfaces': None, u'instance_initiated_shutdown_behavior': u'stop', u'instance_type': u't2.micro', u'tenancy': u'default', u'volumes': None, u'instance_tags': {u'instance': u'local'}, u'group_id': None, u'validate_certs': True}}})
+
+TASK [Convert instance config dict to a list] *************************************************************
+ok: [local]
+
+TASK [Dump instance config] *******************************************************************************
+changed: [local]
+
+TASK [Wait for SSH] ***************************************************************************************
+ok: [local] => (item={u'instance': u'local', u'user': u'ec2-user', u'address': u'3.87.71.90', u'identity_file': u'/root/.cache/molecule/service_tests-role/default/ssh_key', u'port': 22, u'instance_ids': [u'i-03286c62e28ccec11']})
+
+TASK [Install Apache] *************************************************************************************
+[WARNING]: Consider using the yum module rather than running 'yum'.  If you need to use command because
+yum is insufficient you can add 'warn: false' to this command task or set 'command_warnings=False' in
+ansible.cfg to get rid of this message.
+changed: [local]
+
+TASK [Start Apache service] *******************************************************************************
+changed: [local]
+
+TASK [Install firewalld] **********************************************************************************
+changed: [local] => (item=firewalld)
+changed: [local] => (item=ipset)
+
+TASK [Copy page from GitHub] ******************************************************************************
+ok: [local]
+
+TASK [Start httpd services] *******************************************************************************
+ok: [local]
+
+TASK [Wait for boot process to finish] ********************************************************************
+Pausing for 180 seconds
+                       (ctrl+C then 'C' = continue early, ctrl+C then 'A' = abort)
+                                                                                  ress 'C' to continue the play or 'A' to abort
+                    ok: [local]
+
+PLAY RECAP ************************************************************************************************
+local                      : ok=18   changed=9    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+INFO     Inventory /root/ansible_test/service_tests-role/molecule/default/../../../group_vars linked to /root/.cache/molecule/service_tests-role/default/inventory/group_vars
+INFO     Running default > prepare
+
+PLAY [Prepare] ********************************************************************************************
+
+TASK [Make sure python3 is installed] *********************************************************************
+ok: [localhost]
+
+TASK [Make sure apache is installed] **********************************************************************
+ok: [localhost]
+
+PLAY RECAP ************************************************************************************************
+localhost                  : ok=2    changed=0    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[root@localhost service_tests-role]# python3 -m molecule converge
+INFO     default scenario test matrix: dependency, create, prepare, converge
+INFO     Performing prerun...
+INFO     Added ANSIBLE_LIBRARY=/root/.cache/ansible-compat/4c1a25/modules:/root/.ansible/plugins/modules:/usr/share/ansible/plugins/modules
+INFO     Added ANSIBLE_COLLECTIONS_PATHS=/root/.cache/ansible-compat/4c1a25/collections:/root/.ansible/collections:/usr/share/ansible/collections
+INFO     Added ANSIBLE_ROLES_PATH=/root/.cache/ansible-compat/4c1a25/roles:/root/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
+INFO     Using /root/.ansible/roles/blabla.user symlink to current repository in order to enable Ansible to find the role using its expected full name.
+INFO     Inventory /root/ansible_test/service_tests-role/molecule/default/../../vars linked to /root/.cache/molecule/service_tests-role/default/inventory/group_vars
+INFO     Running default > dependency
+WARNING  Skipping, missing the requirements file.
+WARNING  Skipping, missing the requirements file.
+INFO     Inventory /root/ansible_test/service_tests-role/molecule/default/../../vars linked to /root/.cache/molecule/service_tests-role/default/inventory/group_vars
+INFO     Running default > create
+WARNING  Skipping, instances already created.
+INFO     Inventory /root/ansible_test/service_tests-role/molecule/default/../../vars linked to /root/.cache/molecule/service_tests-role/default/inventory/group_vars
+INFO     Running default > prepare
+WARNING  Skipping, instances already prepared.
+INFO     Inventory /root/ansible_test/service_tests-role/molecule/default/../../vars linked to /root/.cache/molecule/service_tests-role/default/inventory/group_vars
+INFO     Running default > converge
+
+PLAY [Converge] *******************************************************************************************
+
+TASK [Gathering Facts] ************************************************************************************
+ok: [local]
+
+TASK [Include service_tests-role] *************************************************************************
+
+TASK [service_tests-role : Install Python 3] **************************************************************
+changed: [local]
+
+TASK [service_tests-role : Install Apache] ****************************************************************
+changed: [local]
+
+TASK [service_tests-role : Start Apache service] **********************************************************
+changed: [local]
+
+TASK [service_tests-role : Install firewalld] *************************************************************
+changed: [local] => (item=firewalld)
+changed: [local] => (item=ipset)
+
+TASK [service_tests-role : Copy page from GitHub] *********************************************************
+changed: [local]
+
+TASK [service_tests-role : Start httpd services] **********************************************************
+ok: [local]
+
+PLAY RECAP ************************************************************************************************
+local                      : ok=7    changed=5    unreachable=0    failed=0    skipped=0    rescued=0    ignored=0
+
+[root@localhost service_tests-role]# python3 -m molecule verify
+INFO     default scenario test matrix: verify
+INFO     Performing prerun...
+INFO     Added ANSIBLE_LIBRARY=/root/.cache/ansible-compat/4c1a25/modules:/root/.ansible/plugins/modules:/usr/share/ansible/plugins/modules
+INFO     Added ANSIBLE_COLLECTIONS_PATHS=/root/.cache/ansible-compat/4c1a25/collections:/root/.ansible/collections:/usr/share/ansible/collections
+INFO     Added ANSIBLE_ROLES_PATH=/root/.cache/ansible-compat/4c1a25/roles:/root/.ansible/roles:/usr/share/ansible/roles:/etc/ansible/roles
+INFO     Using /root/.ansible/roles/blabla.user symlink to current repository in order to enable Ansible to find the role using its expected full name.
+INFO     Inventory /root/ansible_test/service_tests-role/molecule/default/../../vars linked to /root/.cache/molecule/service_tests-role/default/inventory/group_vars
+INFO     Running default > verify
+INFO     Executing Testinfra tests found in /root/ansible_test/service_tests-role/molecule/default/tests/...
+============================= test session starts ==============================
+platform linux -- Python 3.6.8, pytest-6.2.5, py-1.10.0, pluggy-1.0.0
+rootdir: /root
+plugins: testinfra-6.4.0
+collected 7 items
+
+molecule/default/tests/test_default.py .......                           [100%]
+
+============================== 7 passed in 28.10s ==============================
+INFO     Verifier completed successfully.

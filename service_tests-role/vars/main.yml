@@ -1,0 +1,17 @@
+---
+# vars file for service_tests-role
+keypair       : ansible_key
+instance_type : t2.micro
+image         : ami-0e52d91bd15963d8f
+region        : us-east-1
+count         : 1
+security_group: Ansible-SecurityGroup
+
+ansible_python_interpreter: "/usr/bin/python3"
+
+ansible_distribution_major_version: 7
+
+ansible_ssh_private_key_file: "/root/.cache/molecule/service_tests-role/default/ssh_key "
+
+source_file: "./index.html"
+dest_file  : "/var/www/html"

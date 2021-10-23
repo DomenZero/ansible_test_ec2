@@ -1,0 +1,12 @@
+---
+- name: Converge
+  hosts: local
+  become: yes
+  
+  tasks:
+    - name: "Include service_tests-role"
+      include_role:
+        name: "service_tests-role"
+
+# - import_playbook: ../../../playbook_aws_service.yml
+    # - import_playbook: ../../tasks/main.yml 

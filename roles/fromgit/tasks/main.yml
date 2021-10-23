@@ -1,0 +1,23 @@
+---
+- name: Install Apache
+  raw: yum -y install httpd
+  become: yes
+
+- name: Start Apache service
+  raw: systemctl start httpd
+
+- name: Install firewalld
+  raw: yum -y install {{ item }}
+  with_items:
+    - firewalld
+    - ipset
+
+- name: Copy page from GitHub
+  get_url:
+    url: https://raw.githubusercontent.com/DomenZero/autorist/master/public_html/index.html
+    dest: "/var/www/html/index.html"
+
+- name: Start httpd services
+  service:
+    name: httpd
+    state: started

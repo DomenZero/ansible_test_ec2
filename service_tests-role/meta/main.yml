@@ -1,0 +1,14 @@
+---
+galaxy_info:
+  role_name: user
+  author: blabla
+  description: Create EC2 and check
+  company: no name
+  license: "license (BSD, MIT)"
+  min_ansible_version: 3.0
+  platforms:
+    - name: EL
+      versions:
+        - 7
+  galaxy_tags: []
+dependencies: []

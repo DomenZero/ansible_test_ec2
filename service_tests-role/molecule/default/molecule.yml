@@ -1,0 +1,24 @@
+---
+dependency:
+  name: galaxy
+driver:
+  name: ec2
+platforms:
+  - name: local
+    image_owner: 262975736555
+    image_name: ami-0e52d91bd15963d8f
+    instance_type: t2.micro
+    tags:
+      - Name: service_tests-role
+provisioner:
+  name: ansible
+  inventory:
+    links:
+#     group_vars: ../../../group_vars
+      group_vars: ../../vars
+  playbooks:
+    create: create.yml
+    converge: converge.yml
+verifier:
+#  name: ansible
+  name: testinfra
