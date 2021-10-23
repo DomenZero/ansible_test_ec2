@@ -97,7 +97,7 @@ ansible_test/
     └── index.html
 
 ~~~
-### Structure:
+### Project structure:
 
 `playbook_aws_service.yml` - the Ansible playbook that manages main configuration of our ec2 and roles  
 `ansible_key.pem` - the key for the account __ec2-user__  
@@ -117,7 +117,7 @@ ansible_test/
 #### P.S.
 `/root/.cache/molecule/service_tests-role/default/ssh_key` - __Molecule__ will generate the SSH public key for ec2 test 
 
-### Packages for the Ansible station  
+### Packages for the Ansible  
  * epel-release
  * ansible2.9
  * python3
